@@ -1,0 +1,41 @@
+# AMLAC Robot - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core Dependencies
+numpy>=1.21.0
+pillow>=9.0.0
+
+# GPIO and Hardware Control
+RPi.GPIO>=0.7.1
+gpiozero>=1.6.2
+
+# I2C Communication
+smbus2>=0.4.1
+
+# Serial Communication (GPS)
+pyserial>=3.5
+
+# TensorFlow Lite Runtime
+# For Raspberry Pi, install with:
+# pip install tflite-runtime
+# Or use full TensorFlow (larger, but includes tflite):
+# tensorflow>=2.10.0
+tflite-runtime>=2.10.0; platform_machine == "aarch64" or platform_machine == "armv7l"
+
+# Camera Support (Raspberry Pi Camera)
+# Note: picamera2 should be installed via apt on Raspberry Pi OS:
+# sudo apt install python3-picamera2
+# If not available, it will be imported but may fail gracefully
+# picamera2  # Installed via apt, not pip
+
+# Optional: Adafruit Libraries (alternative sensor drivers)
+# adafruit-circuitpython-tcs34725>=3.3.0
+# adafruit-circuitpython-mpu6050>=1.1.0
+
+# Development and Testing
+pytest>=7.0.0
+pytest-cov>=3.0.0
+
+# Note: Some packages may need to be installed system-wide on Raspberry Pi:
+# sudo apt install python3-numpy python3-pil python3-smbus
+

@@ -39,3 +39,6 @@ pytest-cov>=3.0.0
 # Note: Some packages may need to be installed system-wide on Raspberry Pi:
 # sudo apt install python3-numpy python3-pil python3-smbus
 
+# Web interface
+Flask>=3.0.0
+

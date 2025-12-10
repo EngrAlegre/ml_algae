@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+  <div class="panel-header">
+    <h2>All Recent Logs</h2>
+    <small>Shows the latest entries from the newest log file</small>
+  </div>
+  <table id="logs_table_full">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>ML Result</th>
+        <th>Conf</th>
+        <th>Distance (cm)</th>
+        <th>Weight (kg)</th>
+        <th>Water</th>
+        <th>Motor</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<script>
+async function fetchJSON(url) {
+  const res = await fetch(url);
+  return res.json();
+}
+
+async function refreshLogs() {
+  const logs = await fetchJSON('/api/logs');
+  const tbody = document.querySelector('#logs_table_full tbody');
+  tbody.innerHTML = '';
+  logs.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${row.timestamp ?? ''}</td>
+      <td>${row.ml_result ?? ''}</td>
+      <td>${row.ml_confidence ?? ''}</td>
+      <td>${row.distance_cm ?? ''}</td>
+      <td>${row.weight_kg ?? ''}</td>
+      <td>${row.water_level ?? ''}</td>
+      <td>${row.motor_state ?? ''}</td>
+      <td>${row.system_status ?? ''}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function loopRefresh() {
+  refreshLogs();
+  setTimeout(loopRefresh, 5000); // 5s polling
+}
+
+loopRefresh();
+</script>
+{% endblock %}
+

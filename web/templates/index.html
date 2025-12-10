@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+  <div class="panel-header">
+    <h2>Live Status</h2>
+    <small>Auto-refreshes every 3 seconds</small>
+  </div>
+  <div id="status">
+    <div class="grid">
+      <div>
+        <h3>System</h3>
+        <p><strong>Status:</strong> <span id="system_status">--</span></p>
+        <p><strong>Motor:</strong> <span id="motor_state">--</span></p>
+        <p><strong>Timestamp:</strong> <span id="timestamp">--</span></p>
+      </div>
+      <div>
+        <h3>ML Detection</h3>
+        <p><strong>Result:</strong> <span id="ml_result">--</span></p>
+        <p><strong>Confidence:</strong> <span id="ml_confidence">--</span></p>
+      </div>
+      <div>
+        <h3>GPS</h3>
+        <p><strong>Lat:</strong> <span id="gps_lat">--</span></p>
+        <p><strong>Lon:</strong> <span id="gps_lon">--</span></p>
+        <p><strong>Alt:</strong> <span id="gps_alt">--</span></p>
+      </div>
+      <div>
+        <h3>Sensors</h3>
+        <p><strong>Color (R/G/B):</strong> <span id="color_rgb">--</span></p>
+        <p><strong>Distance:</strong> <span id="distance_cm">--</span> cm</p>
+        <p><strong>Weight:</strong> <span id="weight_kg">--</span> kg</p>
+        <p><strong>Water Level:</strong> <span id="water_level">--</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <h2>Stats (Last 500 entries)</h2>
+  </div>
+  <div id="stats" class="grid stats">
+    <div><strong>Total Logs</strong><br><span id="stat_total">--</span></div>
+    <div><strong>Algae Detections</strong><br><span id="stat_algae">--</span></div>
+    <div><strong>Max Weight (kg)</strong><br><span id="stat_weight">--</span></div>
+    <div><strong>Collection Events</strong><br><span id="stat_collections">--</span></div>
+    <div><strong>Success Rate</strong><br><span id="stat_success">--</span>%</div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <h2>Recent Logs</h2>
+    <small>Last 20 entries</small>
+  </div>
+  <table id="logs_table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>ML Result</th>
+        <th>Conf</th>
+        <th>Distance (cm)</th>
+        <th>Weight (kg)</th>
+        <th>Motor</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<script>
+async function fetchJSON(url) {
+  const res = await fetch(url);
+  return res.json();
+}
+
+function setText(id, value) {
+  document.getElementById(id).textContent = value ?? '--';
+}
+
+async function refreshStatus() {
+  const data = await fetchJSON('/api/status');
+  setText('system_status', data.system_status);
+  setText('motor_state', data.motor_state);
+  setText('timestamp', data.timestamp);
+  setText('ml_result', data.ml?.result);
+  setText('ml_confidence', data.ml?.confidence);
+  setText('gps_lat', data.gps?.lat);
+  setText('gps_lon', data.gps?.lon);
+  setText('gps_alt', data.gps?.alt);
+  setText('color_rgb', `${data.sensors?.color?.r}/${data.sensors?.color?.g}/${data.sensors?.color?.b}`);
+  setText('distance_cm', data.sensors?.distance_cm);
+  setText('weight_kg', data.sensors?.weight_kg);
+  setText('water_level', data.sensors?.water_level);
+}
+
+async function refreshStats() {
+  const s = await fetchJSON('/api/stats');
+  setText('stat_total', s.total_logs);
+  setText('stat_algae', s.algae_detections);
+  setText('stat_weight', s.max_weight_kg);
+  setText('stat_collections', s.collection_events);
+  setText('stat_success', s.success_rate);
+}
+
+async function refreshLogs() {
+  const logs = await fetchJSON('/api/logs');
+  const tbody = document.querySelector('#logs_table tbody');
+  tbody.innerHTML = '';
+  logs.slice(0, 20).forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${row.timestamp ?? ''}</td>
+      <td>${row.ml_result ?? ''}</td>
+      <td>${row.ml_confidence ?? ''}</td>
+      <td>${row.distance_cm ?? ''}</td>
+      <td>${row.weight_kg ?? ''}</td>
+      <td>${row.motor_state ?? ''}</td>
+      <td>${row.system_status ?? ''}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function loopRefresh() {
+  refreshStatus();
+  refreshStats();
+  refreshLogs();
+  setTimeout(loopRefresh, 3000); // 3s polling
+}
+
+loopRefresh();
+</script>
+{% endblock %}
+

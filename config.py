@@ -15,12 +15,13 @@ LABELS_PATH = os.path.join(MODELS_DIR, 'labels.txt')
 # Ensure directories exist
 os.makedirs(LOGS_DIR, exist_ok=True)
 os.makedirs(MODELS_DIR, exist_ok=True)
+# Detection images directory will be created if SAVE_DETECTION_IMAGES is True
 
 # ==================== GPIO PIN MAPPINGS ====================
 # Motor Driver 1 (L298N) - Paddle Wheels
 MOTOR_LEFT_IN1 = 17      # Left wheel direction pin 1
-MOTOR_LEFT_IN2 = 18      # Left wheel direction pin 2
-MOTOR_LEFT_PWM = 12      # Left wheel speed (PWM)
+MOTOR_LEFT_IN2 = 27      # Left wheel direction pin 2
+MOTOR_LEFT_PWM = 18      # Left wheel speed (PWM)
 
 MOTOR_RIGHT_IN1 = 22     # Right wheel direction pin 1
 MOTOR_RIGHT_IN2 = 23     # Right wheel direction pin 2
@@ -29,14 +30,14 @@ MOTOR_RIGHT_PWM = 13     # Right wheel speed (PWM)
 # Motor Driver 2 (L298N) - Conveyor Belt
 CONVEYOR_IN1 = 24        # Conveyor direction pin 1
 CONVEYOR_IN2 = 25        # Conveyor direction pin 2
-CONVEYOR_PWM = 19        # Conveyor speed (PWM)
+CONVEYOR_PWM = 12        # Conveyor speed (PWM)
 
 # Ultrasonic Sensor (JSN-SR04T)
-ULTRASONIC_TRIGGER = 5
-ULTRASONIC_ECHO = 6
+ULTRASONIC_TRIGGER = 20
+ULTRASONIC_ECHO = 21
 
 # Float Switch (Water Level Detection)
-FLOAT_SWITCH_PIN = 21
+FLOAT_SWITCH_PIN = 11
 
 # ==================== I2C ADDRESSES ====================
 TCS34725_ADDRESS = 0x29   # RGB Color Sensor
@@ -60,8 +61,8 @@ GPS_BAUDRATE = 9600
 GPS_TIMEOUT = 1.0
 
 # Load Cell (HX711)
-HX711_DATA_PIN = 20
-HX711_CLOCK_PIN = 16
+HX711_DATA_PIN = 8
+HX711_CLOCK_PIN = 7
 HX711_CALIBRATION_FACTOR = 2280  # Adjust based on calibration
 HX711_REFERENCE_UNIT = 1         # Reference unit for weight
 
@@ -81,7 +82,10 @@ PWM_FREQUENCY = 1000  # Hz
 # ==================== ML INFERENCE SETTINGS ====================
 ML_CONFIDENCE_THRESHOLD = 0.7    # Minimum confidence to act on detection
 ML_INPUT_SIZE = (224, 224)       # Model input dimensions
-ML_INFERENCE_INTERVAL = 1.0      # Seconds between ML checks
+ML_INFERENCE_INTERVAL = 0.1      # Seconds between ML checks (~10 FPS for continuous sensor mode)
+ML_CONFIRMATION_FRAMES = 2       # Require N consecutive detections before acting (reduces false positives)
+SAVE_DETECTION_IMAGES = False    # Save images only when algae detected (for debugging)
+DETECTION_IMAGES_DIR = os.path.join(BASE_DIR, 'detection_images')  # Where to save debug images
 
 # ==================== TIMING CONSTANTS ====================
 MAIN_LOOP_INTERVAL = 2.0         # Seconds between main loop cycles
@@ -133,8 +137,8 @@ MAX_SENSOR_RETRIES = 3           # Retries before marking sensor as failed
 GRACEFUL_DEGRADATION = True      # Continue operation if non-critical sensor fails
 
 # ==================== DEBUG SETTINGS ====================
-DEBUG_MODE = False               # Enable verbose logging
-SIMULATE_SENSORS = False         # Use fake sensor data (for testing without hardware)
+DEBUG_MODE = True                # Enable verbose logging
+SIMULATE_SENSORS = True          # Use fake sensor data (for testing without hardware)
 LOG_TO_CONSOLE = True            # Print logs to console
 LOG_TO_FILE = True               # Save logs to file
 

@@ -75,13 +75,13 @@ The AMLAC robot is an autonomous water-based robot that:
 ```
 Left Motor:
   IN1 → GPIO 17
-  IN2 → GPIO 18
-  PWM → GPIO 12 (PWM0)
+  IN2 → GPIO 27
+  PWM → GPIO 18
 
 Right Motor:
   IN1 → GPIO 22
   IN2 → GPIO 23
-  PWM → GPIO 13 (PWM1)
+  PWM → GPIO 13
 ```
 
 ### Motor Connections (L298N #2 - Conveyor)
@@ -89,7 +89,7 @@ Right Motor:
 Conveyor Motor:
   IN1 → GPIO 24
   IN2 → GPIO 25
-  PWM → GPIO 19
+  PWM → GPIO 12
 ```
 
 ### Sensor Connections
@@ -103,8 +103,8 @@ MPU6050 IMU           → I2C Address 0x68
 
 #### Ultrasonic Sensor (JSN-SR04T)
 ```
-TRIGGER → GPIO 5
-ECHO    → GPIO 6
+TRIGGER → GPIO 20
+ECHO    → GPIO 21
 VCC     → 5V
 GND     → GND
 ```
@@ -119,15 +119,15 @@ GND → GND
 
 #### Load Cell (HX711)
 ```
-DATA  → GPIO 20
-CLOCK → GPIO 16
+DATA  → GPIO 8
+CLOCK → GPIO 7
 VCC   → 5V
 GND   → GND
 ```
 
 #### Float Switch
 ```
-Signal → GPIO 21 (with pull-up resistor)
+Signal → GPIO 11 (with pull-up resistor)
 GND    → GND
 ```
 

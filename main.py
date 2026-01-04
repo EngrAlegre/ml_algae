@@ -9,6 +9,7 @@ import sys
 # Import all modules
 from config import (
     MAIN_LOOP_INTERVAL,
+    ML_INFERENCE_INTERVAL,
     ML_CONFIDENCE_THRESHOLD,
     COLLECTION_DURATION,
     PATROL_MOVE_DURATION,
@@ -91,12 +92,14 @@ class AMLACRobot:
         self.main_loop_timer = Timer()
         self.collection_timer = Timer()
         self.patrol_timer = Timer()
+        self.ml_processing_timer = Timer()  # Separate timer for high-frequency ML processing
         self.watchdog = Watchdog(WATCHDOG_TIMEOUT)
         
         # State tracking
         self.collecting = False
         self.total_algae_detected = 0
         self.loop_count = 0
+        self.ml_result = None  # Store latest ML result for main loop
         
         # Check if critical systems initialized
         if not self.motors.initialized:
@@ -384,8 +387,21 @@ class AMLACRobot:
                 if DEBUG_MODE:
                     print(f"\n--- Loop {self.loop_count} ---")
                 
-                # Read all sensors
+                # Process camera sensor at high frequency (10 FPS) - continuous sensor mode
+                # Process multiple times per main loop cycle for real-time detection
+                ml_checks_this_cycle = int(MAIN_LOOP_INTERVAL / ML_INFERENCE_INTERVAL)
+                for _ in range(ml_checks_this_cycle):
+                    if self.ml_processing_timer.has_elapsed(ML_INFERENCE_INTERVAL):
+                        self.ml_result = self.perform_algae_detection()
+                        self.ml_processing_timer.reset()
+                        # Small sleep to maintain processing rate
+                        time.sleep(max(0, ML_INFERENCE_INTERVAL - 0.01))
+                
+                # Read all other sensors (at normal rate)
                 sensor_data = self.read_all_sensors()
+                
+                # Use latest ML result (from continuous processing)
+                ml_result = self.ml_result if self.ml_result else self.perform_algae_detection()
                 
                 # Check safety conditions
                 is_safe, safety_reason = self.check_safety_conditions(sensor_data)
@@ -406,9 +422,6 @@ class AMLACRobot:
                     time.sleep(5)
                     self.state = "running"
                     continue
-                
-                # Perform ML algae detection
-                ml_result = self.perform_algae_detection()
                 
                 # Handle obstacle avoidance
                 if ENABLE_OBSTACLE_AVOIDANCE:

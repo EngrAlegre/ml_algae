@@ -18,7 +18,8 @@ from config import (
     PWM_FREQUENCY,
     PADDLE_DEFAULT_SPEED, PADDLE_MAX_SPEED,
     CONVEYOR_DEFAULT_SPEED, CONVEYOR_MAX_SPEED,
-    DEBUG_MODE
+    DEBUG_MODE,
+    SIMULATE_SENSORS
 )
 
 
@@ -37,7 +38,8 @@ class MotorController:
         self.conveyor_pwm = None
         self.current_state = "stopped"
         
-        if GPIO is None:
+        # Skip GPIO setup entirely if SIMULATE_SENSORS is True or GPIO not available
+        if SIMULATE_SENSORS or GPIO is None:
             print("Motor controller running in simulation mode")
             self.initialized = True
             return
@@ -89,7 +91,7 @@ class MotorController:
             in2_pin: GPIO pin for IN2
             direction: 'forward', 'backward', or 'stop'
         """
-        if GPIO is None:
+        if SIMULATE_SENSORS or GPIO is None:
             return
         
         if direction == 'forward':
@@ -125,7 +127,7 @@ class MotorController:
             self._set_motor_direction(MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, 'forward')
             
             # Set PWM speed
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 self.left_pwm.ChangeDutyCycle(speed * 100 / 255)
                 self.right_pwm.ChangeDutyCycle(speed * 100 / 255)
             
@@ -157,7 +159,7 @@ class MotorController:
             self._set_motor_direction(MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, 'backward')
             
             # Set PWM speed
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 self.left_pwm.ChangeDutyCycle(speed * 100 / 255)
                 self.right_pwm.ChangeDutyCycle(speed * 100 / 255)
             
@@ -189,7 +191,7 @@ class MotorController:
             self._set_motor_direction(MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, 'forward')
             
             # Set PWM speed
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 self.left_pwm.ChangeDutyCycle(speed * 100 / 255)
                 self.right_pwm.ChangeDutyCycle(speed * 100 / 255)
             
@@ -221,7 +223,7 @@ class MotorController:
             self._set_motor_direction(MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, 'backward')
             
             # Set PWM speed
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 self.left_pwm.ChangeDutyCycle(speed * 100 / 255)
                 self.right_pwm.ChangeDutyCycle(speed * 100 / 255)
             
@@ -245,7 +247,7 @@ class MotorController:
             self._set_motor_direction(MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, 'stop')
             
             # Set PWM to 0
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 self.left_pwm.ChangeDutyCycle(0)
                 self.right_pwm.ChangeDutyCycle(0)
             
@@ -276,7 +278,7 @@ class MotorController:
             self._set_motor_direction(CONVEYOR_IN1, CONVEYOR_IN2, 'forward')
             
             # Set PWM speed
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 self.conveyor_pwm.ChangeDutyCycle(speed * 100 / 255)
             
             if DEBUG_MODE:
@@ -297,7 +299,7 @@ class MotorController:
             self._set_motor_direction(CONVEYOR_IN1, CONVEYOR_IN2, 'stop')
             
             # Set PWM to 0
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 self.conveyor_pwm.ChangeDutyCycle(0)
             
             if DEBUG_MODE:
@@ -318,7 +320,7 @@ class MotorController:
             self.stop()
             self.stop_conveyor()
             
-            if GPIO:
+            if not SIMULATE_SENSORS and GPIO:
                 if self.left_pwm:
                     self.left_pwm.stop()
                 if self.right_pwm:

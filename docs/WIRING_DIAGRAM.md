@@ -28,8 +28,8 @@ Complete pin connections for Raspberry Pi 5
 **Left Motor (78 RPM):**
 - OUT1, OUT2 → Left paddle wheel motor
 - IN1 → GPIO 17
-- IN2 → GPIO 18
-- ENA (PWM) → GPIO 12
+- IN2 → GPIO 27
+- ENA (PWM) → GPIO 18
 
 **Right Motor (78 RPM):**
 - OUT3, OUT4 → Right paddle wheel motor
@@ -47,7 +47,7 @@ Complete pin connections for Raspberry Pi 5
 - OUT1, OUT2 → Conveyor belt motor
 - IN1 → GPIO 24
 - IN2 → GPIO 25
-- ENA (PWM) → GPIO 19
+- ENA (PWM) → GPIO 12
 
 ---
 
@@ -94,9 +94,9 @@ I2C Address: 0x27
 
 ```
 VCC → 5V (Pin 2 or 4)
-TRIG → GPIO 5 (Pin 29)
-ECHO → GPIO 6 (Pin 31)
-GND → GND (Pin 6)
+TRIG → GPIO 20 (Pin 38)
+ECHO → GPIO 21 (Pin 40)
+GND → GND (Pin 39)
 ```
 
 ---
@@ -119,8 +119,8 @@ RX (GPS) → TX (GPIO 14, Pin 8) - UART0
 ```
 VCC → 5V (Pin 2 or 4)
 GND → GND
-DT (Data) → GPIO 20 (Pin 38)
-SCK (Clock) → GPIO 16 (Pin 36)
+DT (Data) → GPIO 8 (Pin 24)
+SCK (Clock) → GPIO 7 (Pin 26)
 
 Load Cell Wires:
 Red → E+
@@ -134,8 +134,8 @@ Green → A+
 ## 💧 Float Switch
 
 ```
-Signal → GPIO 21 (Pin 40)
-GND → GND (Pin 39)
+Signal → GPIO 11 (Pin 23)
+GND → GND
 
 Note: Use internal pull-up resistor
       LOW = Water present
@@ -159,22 +159,22 @@ Ribbon cable: Blue side faces USB ports
 |------|-----|----------|--------|
 | 2 | 3 | SDA | I2C Bus (TCS34725, MPU6050, LCD) |
 | 3 | 5 | SCL | I2C Bus (TCS34725, MPU6050, LCD) |
-| 5 | 29 | OUT | Ultrasonic TRIG |
-| 6 | 31 | IN | Ultrasonic ECHO |
-| 12 | 32 | PWM | Left Motor Speed |
+| 7 | 26 | OUT | HX711 Clock |
+| 8 | 24 | IN | HX711 Data |
+| 11 | 23 | IN | Float Switch |
+| 12 | 32 | PWM | Conveyor Speed |
 | 13 | 33 | PWM | Right Motor Speed |
 | 14 | 8 | TX | GPS RX |
 | 15 | 10 | RX | GPS TX |
-| 16 | 36 | OUT | HX711 Clock |
 | 17 | 11 | OUT | Left Motor IN1 |
-| 18 | 12 | OUT | Left Motor IN2 |
-| 19 | 35 | PWM | Conveyor Speed |
-| 20 | 38 | IN | HX711 Data |
-| 21 | 40 | IN | Float Switch |
+| 18 | 12 | PWM | Left Motor Speed |
+| 20 | 38 | OUT | Ultrasonic TRIG |
+| 21 | 40 | IN | Ultrasonic ECHO |
 | 22 | 15 | OUT | Right Motor IN1 |
 | 23 | 16 | OUT | Right Motor IN2 |
 | 24 | 18 | OUT | Conveyor IN1 |
 | 25 | 22 | OUT | Conveyor IN2 |
+| 27 | 13 | OUT | Left Motor IN2 |
 
 ---
 

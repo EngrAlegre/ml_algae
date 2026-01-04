@@ -28,6 +28,10 @@ from config import (
     LABELS_PATH,
     ML_INPUT_SIZE,
     ML_CONFIDENCE_THRESHOLD,
+    ML_INFERENCE_INTERVAL,
+    ML_CONFIRMATION_FRAMES,
+    SAVE_DETECTION_IMAGES,
+    DETECTION_IMAGES_DIR,
     DEBUG_MODE,
     SIMULATE_SENSORS
 )
@@ -37,10 +41,13 @@ class AlgaeDetector:
     """
     ML-based algae detection using TensorFlow Lite model
     Trained with MobileNetV3 architecture
+    
+    Camera operates as continuous sensor (video stream mode)
+    Processes frames at high FPS with confirmation mechanism
     """
     
     def __init__(self):
-        """Initialize ML model and camera"""
+        """Initialize ML model and camera as continuous sensor"""
         self.initialized = False
         self.interpreter = None
         self.input_details = None
@@ -48,23 +55,39 @@ class AlgaeDetector:
         self.labels = []
         self.camera = None
         
+        # Confirmation mechanism: track last N detections
+        self.detection_history = []  # List of recent detection results
+        self.confirmed_algae = False  # True when algae confirmed in multiple frames
+        
         # Load labels
         if not self._load_labels():
             print("Error: Could not load labels")
             return
         
-        # Load TFLite model
+        # Load TFLite model (skip if simulating)
+        if SIMULATE_SENSORS:
+            print("ML inference module running in simulation mode")
+            self.initialized = True
+            return
+        
         if not self._load_model():
             print("Error: Could not load ML model")
             return
         
-        # Initialize camera
+        # Initialize camera as continuous sensor
         if not SIMULATE_SENSORS:
             self._init_camera()
+            
+            # Create detection images directory if needed
+            if SAVE_DETECTION_IMAGES:
+                os.makedirs(DETECTION_IMAGES_DIR, exist_ok=True)
         
         self.initialized = True
         if DEBUG_MODE:
-            print("ML inference module initialized")
+            print("ML inference module initialized (continuous sensor mode)")
+            print(f"  Processing rate: ~{1.0/ML_INFERENCE_INTERVAL:.1f} FPS")
+            print(f"  Confirmation frames: {ML_CONFIRMATION_FRAMES}")
+            print(f"  Save detection images: {SAVE_DETECTION_IMAGES}")
     
     def _load_labels(self):
         """Load class labels from labels.txt"""
@@ -127,7 +150,7 @@ class AlgaeDetector:
             return False
     
     def _init_camera(self):
-        """Initialize Raspberry Pi camera"""
+        """Initialize Raspberry Pi camera for continuous video streaming (sensor mode)"""
         try:
             if Picamera2 is None:
                 print("Warning: picamera2 not available, camera disabled")
@@ -135,10 +158,11 @@ class AlgaeDetector:
             
             self.camera = Picamera2()
             
-            # Configure camera for still capture
-            config = self.camera.create_still_configuration(
+            # Configure camera for continuous video preview (sensor mode)
+            # This enables real-time frame capture without gaps
+            config = self.camera.create_preview_configuration(
                 main={"size": (640, 480)},
-                buffer_count=2
+                buffer_count=3  # Multiple buffers for smooth streaming
             )
             self.camera.configure(config)
             self.camera.start()
@@ -147,7 +171,7 @@ class AlgaeDetector:
             time.sleep(2)
             
             if DEBUG_MODE:
-                print("Camera initialized")
+                print("Camera initialized in continuous video mode (sensor mode)")
             
             return True
             
@@ -195,7 +219,8 @@ class AlgaeDetector:
     
     def capture_frame(self):
         """
-        Capture a frame from the camera
+        Capture latest frame from continuous video stream (sensor mode)
+        Gets the most recent frame from the video buffer - no gaps
         
         Returns:
             PIL Image or None
@@ -209,8 +234,9 @@ class AlgaeDetector:
             return None
         
         try:
-            # Capture frame as numpy array
-            frame = self.camera.capture_array()
+            # Get the latest frame from continuous video stream
+            # This gets the most recent frame from the video buffer
+            frame = self.camera.capture_array("main")
             
             # Convert to PIL Image
             image = Image.fromarray(frame)
@@ -224,17 +250,20 @@ class AlgaeDetector:
     
     def detect(self, image=None):
         """
-        Detect algae in image
+        Detect algae in image with confirmation mechanism
+        Camera operates as continuous sensor - processes latest frame from stream
         
         Args:
-            image: PIL Image or numpy array (if None, captures from camera)
+            image: PIL Image or numpy array (if None, captures latest frame from camera)
             
         Returns:
             dict: {
-                'is_algae': bool,
+                'is_algae': bool,  # Confirmed detection (after confirmation frames)
                 'confidence': float (0-1),
                 'label': str,
-                'all_scores': list of (label, score) tuples
+                'all_scores': list of (label, score) tuples,
+                'raw_detection': bool,  # Current frame detection (before confirmation)
+                'confirmation_count': int  # How many consecutive detections
             }
         """
         if not self.initialized:
@@ -242,10 +271,12 @@ class AlgaeDetector:
                 'is_algae': False,
                 'confidence': 0.0,
                 'label': 'Error',
-                'all_scores': []
+                'all_scores': [],
+                'raw_detection': False,
+                'confirmation_count': 0
             }
         
-        # Capture image if not provided
+        # Capture latest frame from continuous stream if not provided
         if image is None:
             image = self.capture_frame()
             if image is None:
@@ -253,7 +284,9 @@ class AlgaeDetector:
                     'is_algae': False,
                     'confidence': 0.0,
                     'label': 'No Image',
-                    'all_scores': []
+                    'all_scores': [],
+                    'raw_detection': False,
+                    'confirmation_count': 0
                 }
         
         try:
@@ -264,7 +297,9 @@ class AlgaeDetector:
                     'is_algae': False,
                     'confidence': 0.0,
                     'label': 'Preprocessing Error',
-                    'all_scores': []
+                    'all_scores': [],
+                    'raw_detection': False,
+                    'confirmation_count': 0
                 }
             
             # Run inference
@@ -282,8 +317,38 @@ class AlgaeDetector:
             top_score = float(scores[top_index])
             top_label = self.labels[top_index] if top_index < len(self.labels) else f"Class {top_index}"
             
-            # Check if it's algae (assuming index 0 is "Algae")
-            is_algae = (top_index == 0 and top_score >= ML_CONFIDENCE_THRESHOLD)
+            # Check if it's algae (raw detection for current frame)
+            raw_is_algae = (top_index == 0 and top_score >= ML_CONFIDENCE_THRESHOLD)
+            
+            # Update detection history for confirmation
+            self.detection_history.append(raw_is_algae)
+            # Keep only last N frames for confirmation
+            if len(self.detection_history) > ML_CONFIRMATION_FRAMES:
+                self.detection_history.pop(0)
+            
+            # Check confirmation: require N consecutive detections
+            confirmation_count = 0
+            if len(self.detection_history) >= ML_CONFIRMATION_FRAMES:
+                # Count how many recent frames detected algae
+                confirmation_count = sum(self.detection_history[-ML_CONFIRMATION_FRAMES:])
+                self.confirmed_algae = (confirmation_count >= ML_CONFIRMATION_FRAMES)
+            else:
+                # Not enough frames yet, use raw detection
+                self.confirmed_algae = raw_is_algae
+                confirmation_count = sum(self.detection_history)
+            
+            # Save image if algae detected and saving is enabled
+            if raw_is_algae and SAVE_DETECTION_IMAGES and image is not None:
+                try:
+                    timestamp = time.strftime("%Y%m%d_%H%M%S_%f")[:-3]  # Include milliseconds
+                    filename = f"algae_{timestamp}_conf{top_score*100:.0f}.jpg"
+                    filepath = os.path.join(DETECTION_IMAGES_DIR, filename)
+                    image.save(filepath)
+                    if DEBUG_MODE:
+                        print(f"Saved detection image: {filename}")
+                except Exception as e:
+                    if DEBUG_MODE:
+                        print(f"Error saving detection image: {e}")
             
             # Get all scores
             all_scores = [(self.labels[i] if i < len(self.labels) else f"Class {i}", float(scores[i])) 
@@ -292,12 +357,15 @@ class AlgaeDetector:
             if DEBUG_MODE:
                 print(f"Inference time: {inference_time*1000:.1f}ms")
                 print(f"Prediction: {top_label} ({top_score*100:.1f}%)")
+                print(f"Raw detection: {raw_is_algae}, Confirmed: {self.confirmed_algae} ({confirmation_count}/{ML_CONFIRMATION_FRAMES})")
             
             return {
-                'is_algae': is_algae,
+                'is_algae': self.confirmed_algae,  # Confirmed detection
                 'confidence': top_score,
                 'label': top_label,
-                'all_scores': all_scores
+                'all_scores': all_scores,
+                'raw_detection': raw_is_algae,  # Current frame detection
+                'confirmation_count': confirmation_count
             }
             
         except Exception as e:
@@ -306,7 +374,9 @@ class AlgaeDetector:
                 'is_algae': False,
                 'confidence': 0.0,
                 'label': 'Inference Error',
-                'all_scores': []
+                'all_scores': [],
+                'raw_detection': False,
+                'confirmation_count': 0
             }
     
     def detect_from_file(self, image_path):

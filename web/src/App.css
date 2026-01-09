@@ -1,0 +1,145 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: #0b1222;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-indicator {
+  font-size: 14px;
+  animation: pulse 2s infinite;
+}
+
+.status-indicator.connected {
+  color: var(--success);
+}
+
+.status-indicator.disconnected {
+  color: var(--error);
+  animation: none;
+}
+
+.status-text {
+  font-weight: 500;
+}
+
+.connection-status:has(.connected) .status-text {
+  color: var(--success);
+}
+
+.connection-status:has(.disconnected) .status-text {
+  color: var(--error);
+}
+
+.last-seen {
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding-left: 16px;
+  border-left: 1px solid var(--border);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.app-main {
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  width: 100%;
+}
+
+.app-footer {
+  background: #0b1222;
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-header h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+.panel-header small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding: 12px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+

@@ -138,7 +138,7 @@ GRACEFUL_DEGRADATION = True      # Continue operation if non-critical sensor fai
 
 # ==================== DEBUG SETTINGS ====================
 DEBUG_MODE = True                # Enable verbose logging
-SIMULATE_SENSORS = True          # Use fake sensor data (for testing without hardware)
+SIMULATE_SENSORS = False         # DISABLED - Running on real hardware (Raspberry Pi 5)
 LOG_TO_CONSOLE = True            # Print logs to console
 LOG_TO_FILE = True               # Save logs to file
 

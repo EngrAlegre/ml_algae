@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Telemetry collection - public read, server write only
+    match /telemetry/{document=**} {
+      allow read: if true;
+      allow write: if false;  // Only server can write via Firebase Admin SDK
+    }
+    
+    // Events collection - public read, server write only
+    match /events/{document=**} {
+      allow read: if true;
+      allow write: if false;  // Only server can write via Firebase Admin SDK
+    }
+  }
+}
+

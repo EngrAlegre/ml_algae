@@ -1,0 +1,31 @@
+[Unit]
+Description=AMLAC Robot - Automated Machine Learning Algae Collector
+After=network.target multi-user.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=amlac
+Group=amlac
+WorkingDirectory=/home/amlac/ml_algae-robot-system
+ExecStart=/home/amlac/ml_algae-robot-system/start_robot.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=amlac-robot
+
+# Environment variables
+Environment="PYTHONUNBUFFERED=1"
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Resource limits (optional - adjust as needed)
+# LimitCPU=infinity
+# LimitMEMLOCK=infinity
+
+# Security settings
+NoNewPrivileges=false
+PrivateTmp=false
+
+[Install]
+WantedBy=multi-user.target

@@ -1,44 +1,94 @@
 # AMLAC Robot - Python Dependencies
+# For Raspberry Pi 5 Deployment
 # Install with: pip install -r requirements.txt
 
-# Core Dependencies
-numpy>=1.21.0
+# ====================
+# CORE DEPENDENCIES
+# ====================
+# NumPy must be < 2.0 for TFLite runtime compatibility
+numpy>=1.21.0,<2.0.0
 pillow>=9.0.0
 
-# GPIO and Hardware Control
+# ====================
+# GPIO AND HARDWARE CONTROL
+# ====================
 RPi.GPIO>=0.7.1
 gpiozero>=1.6.2
+lgpio>=0.2.2.0
 
-# I2C Communication
+# ====================
+# I2C COMMUNICATION (LCD, Color Sensor, IMU)
+# ====================
 smbus2>=0.4.1
 
-# Serial Communication (GPS)
+# ====================
+# SERIAL COMMUNICATION (GPS)
+# ====================
 pyserial>=3.5
 
-# TensorFlow Lite Runtime
-# For Raspberry Pi, install with:
-# pip install tflite-runtime
-# Or use full TensorFlow (larger, but includes tflite):
-# tensorflow>=2.10.0
-tflite-runtime>=2.10.0; platform_machine == "aarch64" or platform_machine == "armv7l"
+# ====================
+# LOAD CELL (HX711)
+# ====================
+hx711>=1.1.2.3
 
-# Camera Support (Raspberry Pi Camera)
-# Note: picamera2 should be installed via apt on Raspberry Pi OS:
-# sudo apt install python3-picamera2
-# If not available, it will be imported but may fail gracefully
-# picamera2  # Installed via apt, not pip
+# ====================
+# TENSORFLOW LITE RUNTIME (ML INFERENCE)
+# ====================
+# For Raspberry Pi (aarch64) with Python <= 3.11:
+# NOTE: Wheels for Python 3.12+ / 3.13 may not be available yet, so we
+# only require tflite-runtime on older Python versions. On newer Python,
+# the code will run but ML inference will be disabled unless you manually
+# install a compatible TensorFlow / TFLite package.
+tflite-runtime>=2.14.0; python_version < "3.12"
 
-# Optional: Adafruit Libraries (alternative sensor drivers)
-# adafruit-circuitpython-tcs34725>=3.3.0
-# adafruit-circuitpython-mpu6050>=1.1.0
+# ====================
+# CAMERA SUPPORT
+# ====================
+# picamera2 MUST be installed via apt (not pip):
+#   sudo apt install -y python3-picamera2
+#
+# Make sure libcamera is also installed:
+#   sudo apt install -y libcamera-apps libcamera-dev
 
-# Development and Testing
+# ====================
+# FIREBASE INTEGRATION
+# ====================
+firebase-admin>=6.0.0
+
+# ====================
+# DEVELOPMENT AND TESTING
+# ====================
 pytest>=7.0.0
 pytest-cov>=3.0.0
 
-# Note: Some packages may need to be installed system-wide on Raspberry Pi:
-# sudo apt install python3-numpy python3-pil python3-smbus
-
-# Web interface
-Flask>=3.0.0
-
+# ====================
+# RASPBERRY PI 5 INSTALLATION NOTES
+# ====================
+# 
+# STEP 1: System packages (run these first!)
+#   sudo apt update
+#   sudo apt install -y python3-pip python3-venv
+#   sudo apt install -y python3-numpy python3-pil python3-smbus
+#   sudo apt install -y python3-picamera2 libcamera-apps
+#   sudo apt install -y i2c-tools
+#
+# STEP 2: Enable interfaces
+#   sudo raspi-config
+#   - Enable I2C (Interface Options > I2C)
+#   - Enable Camera (Interface Options > Legacy Camera - if needed)
+#   - Enable Serial (Interface Options > Serial Port)
+#
+# STEP 3: Create virtual environment with system packages
+#   python3 -m venv venv --system-site-packages
+#   source venv/bin/activate
+#
+# STEP 4: Install Python packages
+#   pip install -r requirements.txt
+#
+# STEP 5: Verify I2C devices
+#   i2cdetect -y 1
+#   (Should show addresses: 0x27=LCD, 0x29=TCS34725, 0x68=MPU6050)
+#
+# STEP 6: Test camera
+#   libcamera-hello
+#

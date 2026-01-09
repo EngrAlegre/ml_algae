@@ -7,38 +7,98 @@ Handles all sensor readings:
 - NEO-6M (GPS)
 - HX711 (Load Cell)
 - Float Switch (Water Level)
+
+Updated for Raspberry Pi 5 compatibility using lgpio instead of RPi.GPIO
 """
 
 import time
 import serial
 import math
 
+# Try lgpio first (Raspberry Pi 5), then fall back to RPi.GPIO (older Pi)
+GPIO_LIB = None
+lgpio = None
+GPIO = None
+_gpio_handle = None  # Shared handle for lgpio
+
 try:
-    import RPi.GPIO as GPIO
+    import lgpio
+    GPIO_LIB = 'lgpio'
 except ImportError:
-    GPIO = None
-    print("Warning: RPi.GPIO not available")
+    try:
+        import RPi.GPIO as GPIO
+        GPIO_LIB = 'rpigpio'
+    except ImportError:
+        GPIO_LIB = None
+        print("Warning: No GPIO library available")
 
 try:
     import smbus2
-except ImportError:
+    USE_DIRECT_I2C = False
+except Exception as e:
     smbus2 = None
-    print("Warning: smbus2 not available")
+    print(f"Warning: smbus2 not available: {e}")
+    print("  Attempting to use direct I2C implementation...")
+    try:
+        import os
+        import sys
+        # Get the directory where core module is located
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_dir = os.path.dirname(current_dir)
+        i2c_path = os.path.join(parent_dir, 'core', 'i2c_direct.py')
+        
+        if os.path.exists(i2c_path):
+            # Import directly from file path
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("i2c_direct", i2c_path)
+            i2c_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(i2c_module)
+            DirectSMBus = i2c_module.SMBus
+            smbus2 = type('Module', (), {'SMBus': DirectSMBus})()
+            USE_DIRECT_I2C = True
+            print("  ✅ Using direct I2C implementation (no ctypes required)")
+        else:
+            raise ImportError(f"i2c_direct.py not found at {i2c_path}")
+    except Exception as e2:
+        print(f"  ❌ Direct I2C also failed: {e2}")
+        USE_DIRECT_I2C = False
 
-from config import (
-    # Ultrasonic
-    ULTRASONIC_TRIGGER, ULTRASONIC_ECHO, ULTRASONIC_MAX_DISTANCE, ULTRASONIC_TIMEOUT,
-    # I2C
-    TCS34725_ADDRESS, MPU6050_ADDRESS, I2C_BUS,
-    # GPS
-    GPS_SERIAL_PORT, GPS_BAUDRATE, GPS_TIMEOUT,
-    # Load Cell
-    HX711_DATA_PIN, HX711_CLOCK_PIN, HX711_CALIBRATION_FACTOR,
-    # Float Switch
-    FLOAT_SWITCH_PIN,
-    # Settings
-    DEBUG_MODE, SIMULATE_SENSORS, SENSOR_READ_TIMEOUT, MAX_SENSOR_RETRIES
-)
+try:
+    from config import (
+        # Ultrasonic
+        ULTRASONIC_TRIGGER, ULTRASONIC_ECHO, ULTRASONIC_MAX_DISTANCE, ULTRASONIC_TIMEOUT,
+        # I2C
+        TCS34725_ADDRESS, MPU6050_ADDRESS, I2C_BUS,
+        # GPS
+        GPS_SERIAL_PORT, GPS_BAUDRATE, GPS_TIMEOUT,
+        # Load Cell
+        HX711_DATA_PIN, HX711_CLOCK_PIN, HX711_CALIBRATION_FACTOR,
+        # Float Switch
+        FLOAT_SWITCH_PIN,
+        # Settings
+        DEBUG_MODE, SIMULATE_SENSORS, SENSOR_READ_TIMEOUT, MAX_SENSOR_RETRIES
+    )
+except ImportError as e:
+    print(f"Warning: Could not import from config: {e}")
+    # Set defaults if config import fails
+    ULTRASONIC_TRIGGER = 20
+    ULTRASONIC_ECHO = 21
+    ULTRASONIC_MAX_DISTANCE = 400
+    ULTRASONIC_TIMEOUT = 0.1
+    TCS34725_ADDRESS = 0x29
+    MPU6050_ADDRESS = 0x68
+    I2C_BUS = 1
+    GPS_SERIAL_PORT = '/dev/ttyAMA0'
+    GPS_BAUDRATE = 9600
+    GPS_TIMEOUT = 1.0
+    HX711_DATA_PIN = 8
+    HX711_CLOCK_PIN = 7
+    HX711_CALIBRATION_FACTOR = 1.0
+    FLOAT_SWITCH_PIN = 11
+    DEBUG_MODE = True
+    SIMULATE_SENSORS = False
+    SENSOR_READ_TIMEOUT = 1.0
+    MAX_SENSOR_RETRIES = 3
 
 
 class ColorSensor:
@@ -137,21 +197,34 @@ class UltrasonicSensor:
     
     def __init__(self):
         """Initialize ultrasonic sensor"""
+        global _gpio_handle
         self.initialized = False
+        self.gpio_handle = None
         
         if SIMULATE_SENSORS:
             self.initialized = True
             return
         
-        if GPIO is None:
+        if GPIO_LIB is None:
             print("Warning: GPIO not available, ultrasonic sensor disabled")
             return
         
         try:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(ULTRASONIC_TRIGGER, GPIO.OUT)
-            GPIO.setup(ULTRASONIC_ECHO, GPIO.IN)
-            GPIO.output(ULTRASONIC_TRIGGER, GPIO.LOW)
+            if GPIO_LIB == 'lgpio':
+                # Use shared handle or create new one
+                if _gpio_handle is None:
+                    _gpio_handle = lgpio.gpiochip_open(0)
+                self.gpio_handle = _gpio_handle
+                
+                lgpio.gpio_claim_output(self.gpio_handle, ULTRASONIC_TRIGGER)
+                lgpio.gpio_claim_input(self.gpio_handle, ULTRASONIC_ECHO)
+                lgpio.gpio_write(self.gpio_handle, ULTRASONIC_TRIGGER, 0)
+            else:
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(ULTRASONIC_TRIGGER, GPIO.OUT)
+                GPIO.setup(ULTRASONIC_ECHO, GPIO.IN)
+                GPIO.output(ULTRASONIC_TRIGGER, GPIO.LOW)
+            
             time.sleep(0.1)
             
             self.initialized = True
@@ -176,23 +249,42 @@ class UltrasonicSensor:
             return None
         
         try:
-            # Send trigger pulse
-            GPIO.output(ULTRASONIC_TRIGGER, GPIO.HIGH)
-            time.sleep(0.00001)  # 10 microseconds
-            GPIO.output(ULTRASONIC_TRIGGER, GPIO.LOW)
-            
-            # Wait for echo
-            timeout_start = time.time()
-            while GPIO.input(ULTRASONIC_ECHO) == GPIO.LOW:
-                pulse_start = time.time()
-                if pulse_start - timeout_start > ULTRASONIC_TIMEOUT:
-                    return None
-            
-            timeout_start = time.time()
-            while GPIO.input(ULTRASONIC_ECHO) == GPIO.HIGH:
-                pulse_end = time.time()
-                if pulse_end - timeout_start > ULTRASONIC_TIMEOUT:
-                    return None
+            if GPIO_LIB == 'lgpio':
+                # Send trigger pulse
+                lgpio.gpio_write(self.gpio_handle, ULTRASONIC_TRIGGER, 1)
+                time.sleep(0.00001)  # 10 microseconds
+                lgpio.gpio_write(self.gpio_handle, ULTRASONIC_TRIGGER, 0)
+                
+                # Wait for echo
+                timeout_start = time.time()
+                while lgpio.gpio_read(self.gpio_handle, ULTRASONIC_ECHO) == 0:
+                    pulse_start = time.time()
+                    if pulse_start - timeout_start > ULTRASONIC_TIMEOUT:
+                        return None
+                
+                timeout_start = time.time()
+                while lgpio.gpio_read(self.gpio_handle, ULTRASONIC_ECHO) == 1:
+                    pulse_end = time.time()
+                    if pulse_end - timeout_start > ULTRASONIC_TIMEOUT:
+                        return None
+            else:
+                # Send trigger pulse
+                GPIO.output(ULTRASONIC_TRIGGER, GPIO.HIGH)
+                time.sleep(0.00001)  # 10 microseconds
+                GPIO.output(ULTRASONIC_TRIGGER, GPIO.LOW)
+                
+                # Wait for echo
+                timeout_start = time.time()
+                while GPIO.input(ULTRASONIC_ECHO) == GPIO.LOW:
+                    pulse_start = time.time()
+                    if pulse_start - timeout_start > ULTRASONIC_TIMEOUT:
+                        return None
+                
+                timeout_start = time.time()
+                while GPIO.input(ULTRASONIC_ECHO) == GPIO.HIGH:
+                    pulse_end = time.time()
+                    if pulse_end - timeout_start > ULTRASONIC_TIMEOUT:
+                        return None
             
             # Calculate distance (speed of sound = 34300 cm/s)
             pulse_duration = pulse_end - pulse_start
@@ -414,22 +506,34 @@ class LoadCellSensor:
     
     def __init__(self):
         """Initialize HX711 load cell"""
+        global _gpio_handle
         self.initialized = False
         self.offset = 0
+        self.gpio_handle = None
         
         if SIMULATE_SENSORS:
             self.initialized = True
             return
         
-        if GPIO is None:
+        if GPIO_LIB is None:
             print("Warning: GPIO not available, load cell disabled")
             return
         
         try:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(HX711_DATA_PIN, GPIO.IN)
-            GPIO.setup(HX711_CLOCK_PIN, GPIO.OUT)
-            GPIO.output(HX711_CLOCK_PIN, GPIO.LOW)
+            if GPIO_LIB == 'lgpio':
+                # Use shared handle or create new one
+                if _gpio_handle is None:
+                    _gpio_handle = lgpio.gpiochip_open(0)
+                self.gpio_handle = _gpio_handle
+                
+                lgpio.gpio_claim_input(self.gpio_handle, HX711_DATA_PIN)
+                lgpio.gpio_claim_output(self.gpio_handle, HX711_CLOCK_PIN)
+                lgpio.gpio_write(self.gpio_handle, HX711_CLOCK_PIN, 0)
+            else:
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(HX711_DATA_PIN, GPIO.IN)
+                GPIO.setup(HX711_CLOCK_PIN, GPIO.OUT)
+                GPIO.output(HX711_CLOCK_PIN, GPIO.LOW)
             
             # Tare (zero) the scale
             self.tare()
@@ -444,31 +548,55 @@ class LoadCellSensor:
     
     def _read_raw(self):
         """Read raw 24-bit value from HX711"""
-        if not self.initialized or GPIO is None:
+        if not self.initialized or GPIO_LIB is None:
             return 0
         
-        # Wait for data ready (DATA pin goes LOW)
-        timeout = time.time() + 1.0
-        while GPIO.input(HX711_DATA_PIN) == GPIO.HIGH:
-            if time.time() > timeout:
-                return 0
-        
-        # Read 24 bits
-        value = 0
-        for _ in range(24):
-            GPIO.output(HX711_CLOCK_PIN, GPIO.HIGH)
-            value = (value << 1) | GPIO.input(HX711_DATA_PIN)
-            GPIO.output(HX711_CLOCK_PIN, GPIO.LOW)
-        
-        # One more pulse to set gain to 128 for next reading
-        GPIO.output(HX711_CLOCK_PIN, GPIO.HIGH)
-        GPIO.output(HX711_CLOCK_PIN, GPIO.LOW)
-        
-        # Convert to signed 24-bit
-        if value & 0x800000:
-            value -= 0x1000000
-        
-        return value
+        try:
+            if GPIO_LIB == 'lgpio':
+                # Wait for data ready (DATA pin goes LOW)
+                timeout = time.time() + 1.0
+                while lgpio.gpio_read(self.gpio_handle, HX711_DATA_PIN) == 1:
+                    if time.time() > timeout:
+                        return 0
+                
+                # Read 24 bits
+                value = 0
+                for _ in range(24):
+                    lgpio.gpio_write(self.gpio_handle, HX711_CLOCK_PIN, 1)
+                    value = (value << 1) | lgpio.gpio_read(self.gpio_handle, HX711_DATA_PIN)
+                    lgpio.gpio_write(self.gpio_handle, HX711_CLOCK_PIN, 0)
+                
+                # One more pulse to set gain to 128 for next reading
+                lgpio.gpio_write(self.gpio_handle, HX711_CLOCK_PIN, 1)
+                lgpio.gpio_write(self.gpio_handle, HX711_CLOCK_PIN, 0)
+            else:
+                # Wait for data ready (DATA pin goes LOW)
+                timeout = time.time() + 1.0
+                while GPIO.input(HX711_DATA_PIN) == GPIO.HIGH:
+                    if time.time() > timeout:
+                        return 0
+                
+                # Read 24 bits
+                value = 0
+                for _ in range(24):
+                    GPIO.output(HX711_CLOCK_PIN, GPIO.HIGH)
+                    value = (value << 1) | GPIO.input(HX711_DATA_PIN)
+                    GPIO.output(HX711_CLOCK_PIN, GPIO.LOW)
+                
+                # One more pulse to set gain to 128 for next reading
+                GPIO.output(HX711_CLOCK_PIN, GPIO.HIGH)
+                GPIO.output(HX711_CLOCK_PIN, GPIO.LOW)
+            
+            # Convert to signed 24-bit
+            if value & 0x800000:
+                value -= 0x1000000
+            
+            return value
+            
+        except Exception as e:
+            if DEBUG_MODE:
+                print(f"Error reading HX711 raw: {e}")
+            return 0
     
     def tare(self, samples=10):
         """Zero the scale by reading current weight as offset"""
@@ -515,19 +643,30 @@ class FloatSwitch:
     
     def __init__(self):
         """Initialize float switch"""
+        global _gpio_handle
         self.initialized = False
+        self.gpio_handle = None
         
         if SIMULATE_SENSORS:
             self.initialized = True
             return
         
-        if GPIO is None:
+        if GPIO_LIB is None:
             print("Warning: GPIO not available, float switch disabled")
             return
         
         try:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(FLOAT_SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            if GPIO_LIB == 'lgpio':
+                # Use shared handle or create new one
+                if _gpio_handle is None:
+                    _gpio_handle = lgpio.gpiochip_open(0)
+                self.gpio_handle = _gpio_handle
+                
+                # Claim as input with pull-up
+                lgpio.gpio_claim_input(self.gpio_handle, FLOAT_SWITCH_PIN, lgpio.SET_PULL_UP)
+            else:
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(FLOAT_SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
             
             self.initialized = True
             if DEBUG_MODE:
@@ -551,8 +690,12 @@ class FloatSwitch:
             return None
         
         try:
-            # LOW = water present, HIGH = no water (with pull-up resistor)
-            return GPIO.input(FLOAT_SWITCH_PIN) == GPIO.LOW
+            if GPIO_LIB == 'lgpio':
+                # LOW = water present, HIGH = no water (with pull-up resistor)
+                return lgpio.gpio_read(self.gpio_handle, FLOAT_SWITCH_PIN) == 0
+            else:
+                # LOW = water present, HIGH = no water (with pull-up resistor)
+                return GPIO.input(FLOAT_SWITCH_PIN) == GPIO.LOW
             
         except Exception as e:
             if DEBUG_MODE:

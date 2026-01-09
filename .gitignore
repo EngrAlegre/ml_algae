@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Logs
+logs/
+*.log
+
+# Service Account Keys (NEVER COMMIT!)
+serviceAccountKey.json
+*.json.key
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build/Compiled
+build/
+dist/
+*.egg-info/
+
+# Test data (optional - uncomment if you don't want to commit test images)
+# test_data/
+

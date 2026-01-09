@@ -7,20 +7,58 @@ import time
 
 try:
     import smbus2
-except ImportError:
+    SMBUS2_AVAILABLE = True
+    USE_DIRECT_I2C = False
+except Exception as e:
     smbus2 = None
-    print("Warning: smbus2 not available")
+    SMBUS2_AVAILABLE = False
+    print(f"Warning: smbus2 not available: {e}")
+    print("  Attempting to use direct I2C implementation...")
+    try:
+        import os
+        import sys
+        # Get the directory where this file is located
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        i2c_path = os.path.join(current_dir, 'i2c_direct.py')
+        
+        if os.path.exists(i2c_path):
+            # Import directly from file path
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("i2c_direct", i2c_path)
+            i2c_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(i2c_module)
+            DirectSMBus = i2c_module.SMBus
+            smbus2 = type('Module', (), {'SMBus': DirectSMBus})()
+            USE_DIRECT_I2C = True
+            print("  ✅ Using direct I2C implementation (no ctypes required)")
+        else:
+            raise ImportError(f"i2c_direct.py not found at {i2c_path}")
+    except Exception as e2:
+        print(f"  ❌ Direct I2C also failed: {e2}")
+        USE_DIRECT_I2C = False
 
-from config import (
-    LCD_ADDRESS,
-    I2C_BUS,
-    LCD_ROWS,
-    LCD_COLS,
-    DISPLAY_MODES,
-    DISPLAY_ROTATE_INTERVAL,
-    DEBUG_MODE,
-    SIMULATE_SENSORS
-)
+try:
+    from config import (
+        LCD_ADDRESS,
+        I2C_BUS,
+        LCD_ROWS,
+        LCD_COLS,
+        DISPLAY_MODES,
+        DISPLAY_ROTATE_INTERVAL,
+        DEBUG_MODE,
+        SIMULATE_SENSORS
+    )
+except ImportError as e:
+    print(f"Warning: Could not import from config: {e}")
+    # Set defaults if config import fails
+    LCD_ADDRESS = 0x27
+    I2C_BUS = 1
+    LCD_ROWS = 2
+    LCD_COLS = 16
+    DISPLAY_MODES = ['algae', 'gps', 'weight', 'distance', 'status']
+    DISPLAY_ROTATE_INTERVAL = 5.0
+    DEBUG_MODE = True
+    SIMULATE_SENSORS = False
 
 
 class LCDDisplay:
@@ -89,26 +127,47 @@ class LCDDisplay:
             return
         
         if smbus2 is None:
-            print("Warning: smbus2 not available, LCD disabled")
+            print("Warning: I2C not available, LCD disabled")
             return
         
         try:
             self.bus = smbus2.SMBus(I2C_BUS)
             
-            # Initialize display
-            self._lcd_init()
+            # Test I2C communication first
+            try:
+                self.bus.read_byte(LCD_ADDRESS)
+                if DEBUG_MODE:
+                    print(f"LCD I2C communication test successful at address 0x{LCD_ADDRESS:02x}")
+            except Exception as e:
+                print(f"Warning: Cannot communicate with LCD at 0x{LCD_ADDRESS:02x}: {e}")
+                print("Check I2C address and connections")
             
-            # Show startup message
-            self.clear()
-            self.write_line("AMLAC Robot", 0)
-            self.write_line("Initializing...", 1)
+            # Initialize display with robust sequence
+            self._lcd_init()
+            time.sleep(0.2)  # Extra settling time after init
+            
+            # Show startup message - try twice for reliability
+            for attempt in range(2):
+                self.clear()
+                time.sleep(0.1)
+                self.write_line("AMLAC Robot", 0)
+                time.sleep(0.05)
+                self.write_line("Initializing...", 1)
+                time.sleep(0.1)
+                
+                # Verify by re-clearing and rewriting if first attempt
+                if attempt == 0:
+                    time.sleep(0.3)  # Let it display briefly
             
             self.initialized = True
             if DEBUG_MODE:
-                print("LCD display initialized")
+                print("LCD display initialized successfully")
                 
         except Exception as e:
             print(f"Error initializing LCD: {e}")
+            import traceback
+            if DEBUG_MODE:
+                traceback.print_exc()
             self.initialized = False
     
     def _lcd_write(self, cmd):
@@ -116,8 +175,9 @@ class LCDDisplay:
         try:
             self.bus.write_byte(LCD_ADDRESS, cmd)
             time.sleep(0.0001)
-        except:
-            pass
+        except Exception as e:
+            if DEBUG_MODE:
+                print(f"LCD write error: {e}")
     
     def _lcd_strobe(self, data):
         """Toggle enable pin"""
@@ -137,17 +197,67 @@ class LCDDisplay:
         self._lcd_write_four_bits(mode | ((cmd << 4) & 0xF0))
     
     def _lcd_init(self):
-        """Initialize LCD in 4-bit mode"""
-        self._lcd_write(0x03)
-        self._lcd_write(0x03)
-        self._lcd_write(0x03)
-        self._lcd_write(0x02)
+        """Initialize LCD in 4-bit mode with robust timing for cold boot"""
+        # === CRITICAL: Wait for LCD to power up completely ===
+        # HD44780 datasheet says wait at least 40ms after VCC rises to 4.5V
+        # On cold boot, the LCD might take longer to stabilize
+        time.sleep(0.2)  # 200ms - generous power-up time
         
+        # Turn on backlight and let it stabilize
+        self._lcd_write(self.LCD_BACKLIGHT)
+        time.sleep(0.1)  # 100ms for backlight
+        
+        # === Hard Reset Sequence ===
+        # Per HD44780 datasheet, we need to send 0x30 (8-bit mode) three times
+        # with specific timing to ensure a clean reset from ANY state
+        
+        # First attempt - LCD might be in 4-bit or 8-bit mode, unknown state
+        # Send 0x30 (upper nibble 0x3 for 8-bit mode command)
+        self._lcd_write_four_bits(0x30)
+        time.sleep(0.005)  # Wait at least 4.1ms
+        
+        # Second attempt
+        self._lcd_write_four_bits(0x30)
+        time.sleep(0.005)  # Wait at least 4.1ms (be generous)
+        
+        # Third attempt  
+        self._lcd_write_four_bits(0x30)
+        time.sleep(0.002)  # Wait at least 100us, give it 2ms
+        
+        # === Now switch to 4-bit mode ===
+        # Send 0x20 (upper nibble 0x2 for 4-bit mode)
+        self._lcd_write_four_bits(0x20)
+        time.sleep(0.005)  # Wait for mode switch
+        
+        # === LCD is now in 4-bit mode, send full commands ===
+        
+        # Function set: 4-bit mode, 2 lines, 5x8 dots
         self._lcd_write_byte(self.LCD_FUNCTIONSET | self.LCD_2LINE | self.LCD_5x8DOTS | self.LCD_4BITMODE)
-        self._lcd_write_byte(self.LCD_DISPLAYCONTROL | self.LCD_DISPLAYON)
+        time.sleep(0.005)
+        
+        # Display OFF first (clean state)
+        self._lcd_write_byte(self.LCD_DISPLAYCONTROL | self.LCD_DISPLAYOFF)
+        time.sleep(0.005)
+        
+        # Clear display
         self._lcd_write_byte(self.LCD_CLEARDISPLAY)
-        self._lcd_write_byte(self.LCD_ENTRYMODESET | self.LCD_ENTRYLEFT)
-        time.sleep(0.2)
+        time.sleep(0.005)  # Clear command needs at least 1.52ms
+        
+        # Entry mode set: increment, no shift
+        self._lcd_write_byte(self.LCD_ENTRYMODESET | self.LCD_ENTRYLEFT | self.LCD_ENTRYSHIFTDECREMENT)
+        time.sleep(0.005)
+        
+        # Return home (cursor to 0,0)
+        self._lcd_write_byte(self.LCD_RETURNHOME)
+        time.sleep(0.005)  # Return home needs at least 1.52ms
+        
+        # Display ON, cursor off, blink off
+        self._lcd_write_byte(self.LCD_DISPLAYCONTROL | self.LCD_DISPLAYON | self.LCD_CURSOROFF | self.LCD_BLINKOFF)
+        time.sleep(0.005)
+        
+        # Clear one more time for good measure
+        self._lcd_write_byte(self.LCD_CLEARDISPLAY)
+        time.sleep(0.005)
     
     def clear(self):
         """Clear display"""
@@ -161,7 +271,7 @@ class LCDDisplay:
         
         try:
             self._lcd_write_byte(self.LCD_CLEARDISPLAY)
-            time.sleep(0.002)
+            time.sleep(0.003)  # Clear command needs at least 1.52ms, give it more
             return True
         except Exception as e:
             if DEBUG_MODE:
@@ -188,13 +298,15 @@ class LCDDisplay:
             # Truncate or pad text to fit LCD width
             text = text[:LCD_COLS].ljust(LCD_COLS)
             
-            # Set cursor position
+            # Set cursor position (DDRAM address)
             line_addr = 0x80 if line == 0 else 0xC0
             self._lcd_write_byte(line_addr)
+            time.sleep(0.001)  # Small delay after setting cursor
             
             # Write characters
             for char in text:
                 self._lcd_write_byte(ord(char), self.Rs)
+                time.sleep(0.0001)  # Small delay between characters
             
             return True
             
@@ -324,6 +436,42 @@ class LCDDisplay:
         self.write_line(line1, 0)
         if line2:
             self.write_line(line2, 1)
+    
+    def reinit(self):
+        """
+        Reinitialize the LCD display
+        Call this if display shows garbled text
+        """
+        if SIMULATE_SENSORS:
+            return True
+            
+        if self.bus is None:
+            return False
+        
+        try:
+            if DEBUG_MODE:
+                print("Reinitializing LCD display...")
+            
+            # Run full initialization again
+            self._lcd_init()
+            time.sleep(0.2)
+            
+            # Show a message to confirm it's working
+            self.clear()
+            time.sleep(0.1)
+            self.write_line("LCD Reset OK", 0)
+            time.sleep(0.5)
+            self.clear()
+            
+            if DEBUG_MODE:
+                print("LCD reinitialized successfully")
+            
+            return True
+            
+        except Exception as e:
+            if DEBUG_MODE:
+                print(f"Error reinitializing LCD: {e}")
+            return False
     
     def cleanup(self):
         """Clean up resources"""

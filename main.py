@@ -1,6 +1,7 @@
 """
 AMLAC Robot - Main System Controller
 Orchestrates all robot subsystems for autonomous algae collection
+Supports graceful degradation when hardware is not connected
 """
 
 import time
@@ -35,6 +36,13 @@ from sensors.sensors import (
 )
 from core.ml_inference import AlgaeDetector
 from core.data_logger import DataLogger
+try:
+    from core.firebase_logger import FirebaseLogger
+    FIREBASE_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: Firebase logger not available: {e}")
+    FirebaseLogger = None
+    FIREBASE_AVAILABLE = False
 from core.display import LCDDisplay
 from utils import (
     GracefulShutdown,
@@ -52,10 +60,11 @@ class AMLACRobot:
     """
     Main AMLAC Robot Controller
     Integrates all subsystems and implements autonomous behavior
+    Supports graceful degradation when hardware is unavailable
     """
     
     def __init__(self):
-        """Initialize all robot subsystems"""
+        """Initialize all robot subsystems with graceful degradation"""
         print("\n" + "=" * 60)
         print(f"  {ROBOT_NAME} - Automated Machine Learning Algae Collector")
         print(f"  Version {ROBOT_VERSION}")
@@ -64,70 +73,281 @@ class AMLACRobot:
         self.initialized = False
         self.state = "initializing"
         
+        # Track hardware status
+        self.hardware_status = {
+            'motors': False,
+            'camera': False,
+            'ml_model': False,
+            'color_sensor': False,
+            'ultrasonic': False,
+            'imu': False,
+            'gps': False,
+            'load_cell': False,
+            'float_switch': False,
+            'display': False,
+            'firebase': False,
+            'logger': False
+        }
+        
         # Initialize shutdown handler
         self.shutdown_handler = GracefulShutdown()
         
-        # Initialize subsystems
-        log_info("Initializing motor controller...")
-        self.motors = MotorController()
-        
-        log_info("Initializing sensors...")
-        self.color_sensor = ColorSensor()
-        self.ultrasonic_sensor = UltrasonicSensor()
-        self.imu_sensor = IMUSensor()
-        self.gps_sensor = GPSSensor()
-        self.load_cell = LoadCellSensor()
-        self.float_switch = FloatSwitch()
-        
-        log_info("Initializing ML detector...")
-        self.ml_detector = AlgaeDetector()
-        
-        log_info("Initializing data logger...")
-        self.logger = DataLogger()
-        
-        log_info("Initializing display...")
-        self.display = LCDDisplay()
+        # Initialize all subsystems with error handling
+        self._init_motors()
+        self._init_sensors()
+        self._init_ml_detector()
+        self._init_loggers()
+        self._init_display()
         
         # Initialize timers and watchdog
         self.main_loop_timer = Timer()
         self.collection_timer = Timer()
         self.patrol_timer = Timer()
-        self.ml_processing_timer = Timer()  # Separate timer for high-frequency ML processing
+        self.ml_processing_timer = Timer()
         self.watchdog = Watchdog(WATCHDOG_TIMEOUT)
+        self.status_display_timer = Timer()  # For cycling hardware status
         
         # State tracking
         self.collecting = False
         self.total_algae_detected = 0
         self.loop_count = 0
-        self.ml_result = None  # Store latest ML result for main loop
+        self.ml_result = None
+        self.status_display_index = 0  # For cycling through status messages
         
-        # Check if critical systems initialized
-        if not self.motors.initialized:
-            log_error("Motor controller failed to initialize")
-            self.state = "error"
-            return
+        # Count working systems
+        working_count = sum(1 for v in self.hardware_status.values() if v)
+        total_count = len(self.hardware_status)
         
-        if not self.ml_detector.initialized:
-            log_error("ML detector failed to initialize")
-            self.state = "error"
-            return
-        
-        if not self.logger.initialized:
-            log_error("Data logger failed to initialize")
-            self.state = "error"
-            return
-        
+        # Always initialize - run in degraded mode if needed
         self.initialized = True
         self.state = "ready"
         
-        log_info("All systems initialized successfully!")
-        if self.display.initialized:
-            self.display.show_message("AMLAC Ready", "Systems OK")
-            time.sleep(2)
+        # Print hardware status summary
+        self._print_hardware_status()
+        
+        log_info(f"System initialized: {working_count}/{total_count} components ready")
+        
+        # Show status on display
+        if self.hardware_status['display']:
+            self._show_startup_status()
+    
+    def _init_motors(self):
+        """Initialize motor controller"""
+        log_info("Initializing motor controller...")
+        try:
+            self.motors = MotorController()
+            self.hardware_status['motors'] = self.motors.initialized
+        except Exception as e:
+            log_error("Motor controller init failed", e)
+            self.motors = None
+            self.hardware_status['motors'] = False
+    
+    def _init_sensors(self):
+        """Initialize all sensors"""
+        log_info("Initializing sensors...")
+        
+        # Color sensor
+        try:
+            self.color_sensor = ColorSensor()
+            self.hardware_status['color_sensor'] = self.color_sensor.initialized
+        except Exception as e:
+            log_error("Color sensor init failed", e)
+            self.color_sensor = None
+            
+        # Ultrasonic sensor
+        try:
+            self.ultrasonic_sensor = UltrasonicSensor()
+            self.hardware_status['ultrasonic'] = self.ultrasonic_sensor.initialized
+        except Exception as e:
+            log_error("Ultrasonic sensor init failed", e)
+            self.ultrasonic_sensor = None
+            
+        # IMU sensor
+        try:
+            self.imu_sensor = IMUSensor()
+            self.hardware_status['imu'] = self.imu_sensor.initialized
+        except Exception as e:
+            log_error("IMU sensor init failed", e)
+            self.imu_sensor = None
+            
+        # GPS sensor
+        try:
+            self.gps_sensor = GPSSensor()
+            self.hardware_status['gps'] = self.gps_sensor.initialized
+        except Exception as e:
+            log_error("GPS sensor init failed", e)
+            self.gps_sensor = None
+            
+        # Load cell
+        try:
+            self.load_cell = LoadCellSensor()
+            self.hardware_status['load_cell'] = self.load_cell.initialized
+        except Exception as e:
+            log_error("Load cell init failed", e)
+            self.load_cell = None
+            
+        # Float switch
+        try:
+            self.float_switch = FloatSwitch()
+            self.hardware_status['float_switch'] = self.float_switch.initialized
+        except Exception as e:
+            log_error("Float switch init failed", e)
+            self.float_switch = None
+    
+    def _init_ml_detector(self):
+        """Initialize ML detector"""
+        log_info("Initializing ML detector...")
+        try:
+            self.ml_detector = AlgaeDetector()
+            self.hardware_status['ml_model'] = self.ml_detector.initialized
+            self.hardware_status['camera'] = self.ml_detector.camera_initialized if hasattr(self.ml_detector, 'camera_initialized') else self.ml_detector.initialized
+        except Exception as e:
+            log_error("ML detector init failed", e)
+            self.ml_detector = None
+            self.hardware_status['ml_model'] = False
+            self.hardware_status['camera'] = False
+    
+    def _init_loggers(self):
+        """Initialize data loggers"""
+        log_info("Initializing data logger...")
+        try:
+            self.logger = DataLogger()
+            self.hardware_status['logger'] = self.logger.initialized
+        except Exception as e:
+            log_error("Data logger init failed", e)
+            self.logger = None
+            
+        log_info("Initializing Firebase logger...")
+        if FIREBASE_AVAILABLE and FirebaseLogger:
+            try:
+                self.firebase_logger = FirebaseLogger()
+                self.hardware_status['firebase'] = self.firebase_logger.initialized
+            except Exception as e:
+                log_error("Firebase logger init failed", e)
+                self.firebase_logger = None
+        else:
+            print("Warning: Firebase logger not available - skipping")
+            self.firebase_logger = None
+            self.hardware_status['firebase'] = False
+    
+    def _init_display(self):
+        """Initialize LCD display with extra reliability"""
+        log_info("Initializing display...")
+        try:
+            self.display = LCDDisplay()
+            
+            if self.display.initialized:
+                # Give LCD extra settling time after initialization
+                time.sleep(0.5)
+                
+                # Reinitialize once more to ensure clean state
+                # This helps prevent garbled text on cold boot
+                self.display.reinit()
+                time.sleep(0.3)
+            
+            self.hardware_status['display'] = self.display.initialized
+        except Exception as e:
+            log_error("Display init failed", e)
+            self.display = None
+    
+    def _print_hardware_status(self):
+        """Print hardware status summary"""
+        print("\n" + "-" * 40)
+        print("  HARDWARE STATUS")
+        print("-" * 40)
+        
+        status_items = [
+            ('Motors', 'motors'),
+            ('Camera', 'camera'),
+            ('ML Model', 'ml_model'),
+            ('Color Sensor', 'color_sensor'),
+            ('Ultrasonic', 'ultrasonic'),
+            ('IMU', 'imu'),
+            ('GPS', 'gps'),
+            ('Load Cell', 'load_cell'),
+            ('Float Switch', 'float_switch'),
+            ('LCD Display', 'display'),
+            ('Firebase', 'firebase'),
+            ('Logger', 'logger'),
+        ]
+        
+        for name, key in status_items:
+            status = "OK" if self.hardware_status[key] else "NOT CONNECTED"
+            symbol = "✓" if self.hardware_status[key] else "✗"
+            print(f"  {symbol} {name}: {status}")
+        
+        print("-" * 40 + "\n")
+    
+    def _show_startup_status(self):
+        """Show startup status on LCD"""
+        if not self.display or not self.hardware_status['display']:
+            return
+            
+        # Count working/total
+        working = sum(1 for v in self.hardware_status.values() if v)
+        total = len(self.hardware_status)
+        
+        # Show summary
+        self.display.show_message("AMLAC Starting", f"HW: {working}/{total} Ready")
+        time.sleep(2)
+        
+        # Show critical systems status
+        critical_status = []
+        
+        if not self.hardware_status['motors']:
+            critical_status.append(("MOTORS", "NOT FOUND"))
+        if not self.hardware_status['camera']:
+            critical_status.append(("CAMERA", "NOT FOUND"))
+        if not self.hardware_status['ml_model']:
+            critical_status.append(("ML MODEL", "NOT LOADED"))
+            
+        # Show warnings for critical systems
+        for name, status in critical_status:
+            self.display.show_message(f"WARN: {name}", status)
+            time.sleep(1.5)
+        
+        # Final ready message
+        if working == total:
+            self.display.show_message("AMLAC Ready", "All Systems OK")
+        else:
+            self.display.show_message("AMLAC Ready", f"Degraded Mode")
+        time.sleep(1)
+    
+    def _get_status_message(self):
+        """Get current hardware status message for LCD rotation"""
+        # List of status messages to cycle through
+        messages = []
+        
+        # Add status for each component
+        if not self.hardware_status['motors']:
+            messages.append(("MOTORS", "Disconnected"))
+        if not self.hardware_status['camera']:
+            messages.append(("CAMERA", "Disconnected"))
+        if not self.hardware_status['ml_model']:
+            messages.append(("ML MODEL", "Not Loaded"))
+        if not self.hardware_status['color_sensor']:
+            messages.append(("COLOR SENS", "Disconnected"))
+        if not self.hardware_status['ultrasonic']:
+            messages.append(("ULTRASONIC", "Disconnected"))
+        if not self.hardware_status['gps']:
+            messages.append(("GPS", "Disconnected"))
+        if not self.hardware_status['load_cell']:
+            messages.append(("LOAD CELL", "Disconnected"))
+        if not self.hardware_status['float_switch']:
+            messages.append(("FLOAT SW", "Disconnected"))
+        if not self.hardware_status['firebase']:
+            messages.append(("FIREBASE", "Offline"))
+        
+        if not messages:
+            return None  # All systems OK
+        
+        # Cycle through messages
+        self.status_display_index = (self.status_display_index + 1) % len(messages)
+        return messages[self.status_display_index]
     
     def read_all_sensors(self):
         """
-        Read data from all sensors
+        Read data from all sensors with graceful handling
         
         Returns:
             dict: Dictionary containing all sensor readings
@@ -135,42 +355,64 @@ class AMLACRobot:
         sensor_data = {}
         
         # Read color sensor
-        color_data = self.color_sensor.read()
-        if color_data:
-            sensor_data['color_r'] = color_data['r']
-            sensor_data['color_g'] = color_data['g']
-            sensor_data['color_b'] = color_data['b']
+        if self.color_sensor and self.hardware_status['color_sensor']:
+            color_data = self.color_sensor.read()
+            if color_data:
+                sensor_data['color_r'] = color_data['r']
+                sensor_data['color_g'] = color_data['g']
+                sensor_data['color_b'] = color_data['b']
+            else:
+                sensor_data['color_r'] = 0
+                sensor_data['color_g'] = 0
+                sensor_data['color_b'] = 0
         else:
             sensor_data['color_r'] = 0
             sensor_data['color_g'] = 0
             sensor_data['color_b'] = 0
         
         # Read ultrasonic sensor
-        distance = self.ultrasonic_sensor.read()
-        sensor_data['distance_cm'] = distance if distance is not None else 999.9
+        if self.ultrasonic_sensor and self.hardware_status['ultrasonic']:
+            distance = self.ultrasonic_sensor.read()
+            sensor_data['distance_cm'] = distance if distance is not None else 999.9
+        else:
+            sensor_data['distance_cm'] = 999.9  # Safe default (no obstacle)
         
-        # Read IMU (not used in main logic yet, but logged)
-        imu_data = self.imu_sensor.read()
-        sensor_data['imu_data'] = imu_data
+        # Read IMU
+        if self.imu_sensor and self.hardware_status['imu']:
+            imu_data = self.imu_sensor.read()
+            sensor_data['imu_data'] = imu_data
+        else:
+            sensor_data['imu_data'] = None
         
         # Read GPS
-        gps_data = self.gps_sensor.read()
-        if gps_data:
-            sensor_data['gps_latitude'] = gps_data['latitude']
-            sensor_data['gps_longitude'] = gps_data['longitude']
-            sensor_data['gps_altitude'] = gps_data['altitude']
+        if self.gps_sensor and self.hardware_status['gps']:
+            gps_data = self.gps_sensor.read()
+            if gps_data:
+                sensor_data['gps_latitude'] = gps_data['latitude']
+                sensor_data['gps_longitude'] = gps_data['longitude']
+                sensor_data['gps_altitude'] = gps_data['altitude']
+            else:
+                sensor_data['gps_latitude'] = None
+                sensor_data['gps_longitude'] = None
+                sensor_data['gps_altitude'] = None
         else:
             sensor_data['gps_latitude'] = None
             sensor_data['gps_longitude'] = None
             sensor_data['gps_altitude'] = None
         
         # Read load cell
-        weight = self.load_cell.read()
-        sensor_data['weight_kg'] = weight if weight is not None else 0.0
+        if self.load_cell and self.hardware_status['load_cell']:
+            weight = self.load_cell.read()
+            sensor_data['weight_kg'] = weight if weight is not None else 0.0
+        else:
+            sensor_data['weight_kg'] = 0.0
         
         # Read float switch
-        water_level = self.float_switch.read()
-        sensor_data['water_level'] = water_level if water_level is not None else True
+        if self.float_switch and self.hardware_status['float_switch']:
+            water_level = self.float_switch.read()
+            sensor_data['water_level'] = water_level if water_level is not None else True
+        else:
+            sensor_data['water_level'] = True  # Assume water present if no sensor
         
         return sensor_data
     
@@ -184,13 +426,13 @@ class AMLACRobot:
         Returns:
             tuple: (is_safe: bool, reason: str)
         """
-        # Check water level
-        if ENABLE_WATER_LEVEL_CHECK:
+        # Check water level (only if sensor is connected)
+        if ENABLE_WATER_LEVEL_CHECK and self.hardware_status['float_switch']:
             if not sensor_data.get('water_level', True):
                 return False, "No water detected"
         
-        # Check obstacle distance
-        if ENABLE_OBSTACLE_AVOIDANCE:
+        # Check obstacle distance (only if sensor is connected)
+        if ENABLE_OBSTACLE_AVOIDANCE and self.hardware_status['ultrasonic']:
             distance = sensor_data.get('distance_cm', 999)
             if distance < OBSTACLE_WARNING_DISTANCE:
                 return False, f"Obstacle too close ({distance:.1f}cm)"
@@ -204,6 +446,15 @@ class AMLACRobot:
         Returns:
             dict: Detection results
         """
+        # Check if ML detector is available
+        if not self.ml_detector or not self.hardware_status['ml_model']:
+            return {
+                'is_algae': False,
+                'confidence': 0.0,
+                'label': 'ML Unavailable',
+                'all_scores': []
+            }
+        
         try:
             result = self.ml_detector.detect()
             return result
@@ -224,6 +475,10 @@ class AMLACRobot:
             sensor_data: Dictionary of sensor readings
             ml_result: ML detection results
         """
+        # Check if motors are available
+        if not self.motors or not self.hardware_status['motors']:
+            return  # Can't execute behavior without motors
+        
         is_algae = ml_result['is_algae']
         confidence = ml_result['confidence']
         
@@ -243,7 +498,7 @@ class AMLACRobot:
                 # Start conveyor
                 self.motors.start_conveyor()
                 
-                if self.display.initialized:
+                if self.display and self.hardware_status['display']:
                     self.display.show_message("COLLECTING", "Algae Detected!")
             
             # Continue collection for specified duration
@@ -284,6 +539,9 @@ class AMLACRobot:
         Args:
             sensor_data: Dictionary of sensor readings
         """
+        if not self.motors or not self.hardware_status['motors']:
+            return  # Can't handle obstacle without motors
+        
         distance = sensor_data.get('distance_cm', 999)
         
         if distance < OBSTACLE_WARNING_DISTANCE:
@@ -310,13 +568,15 @@ class AMLACRobot:
     
     def log_telemetry(self, sensor_data, ml_result):
         """
-        Log telemetry data to CSV
+        Log telemetry data to CSV and Firebase
         
         Args:
             sensor_data: Dictionary of sensor readings
             ml_result: ML detection results
         """
         try:
+            motor_state = self.motors.get_state() if self.motors else "unavailable"
+            
             log_data = {
                 'gps_latitude': sensor_data.get('gps_latitude', ''),
                 'gps_longitude': sensor_data.get('gps_longitude', ''),
@@ -329,11 +589,17 @@ class AMLACRobot:
                 'water_level': sensor_data.get('water_level', ''),
                 'ml_result': ml_result.get('label', ''),
                 'ml_confidence': ml_result.get('confidence', ''),
-                'motor_state': self.motors.get_state(),
+                'motor_state': motor_state,
                 'system_status': self.state
             }
             
-            self.logger.log(log_data)
+            # Log to CSV (local backup)
+            if self.logger and self.hardware_status['logger']:
+                self.logger.log(log_data)
+            
+            # Log to Firebase (real-time database)
+            if self.firebase_logger and self.hardware_status['firebase']:
+                self.firebase_logger.log(log_data)
             
         except Exception as e:
             log_error("Error logging telemetry", e)
@@ -346,7 +612,19 @@ class AMLACRobot:
             sensor_data: Dictionary of sensor readings
             ml_result: ML detection results
         """
+        if not self.display or not self.hardware_status['display']:
+            return
+        
         try:
+            # Check if any hardware is disconnected - show warning periodically
+            if self.status_display_timer.has_elapsed(10):  # Every 10 seconds
+                status_msg = self._get_status_message()
+                if status_msg:
+                    self.display.show_message(f"WARN:{status_msg[0]}", status_msg[1])
+                    time.sleep(1.5)
+                    self.status_display_timer.reset()
+            
+            # Normal display update
             display_data = {
                 'is_algae': ml_result.get('is_algae', False),
                 'ml_confidence': ml_result.get('confidence', 0.0),
@@ -364,7 +642,7 @@ class AMLACRobot:
             log_error("Error updating display", e)
     
     def main_loop(self):
-        """Main robot control loop"""
+        """Main robot control loop with graceful degradation"""
         if not self.initialized:
             log_error("Robot not initialized properly")
             return
@@ -372,8 +650,12 @@ class AMLACRobot:
         log_info("Starting main control loop...")
         self.state = "running"
         
-        if self.display.initialized:
-            self.display.show_message("AMLAC Active", "Searching...")
+        # Show starting message
+        if self.display and self.hardware_status['display']:
+            if self.hardware_status['motors'] and self.hardware_status['ml_model']:
+                self.display.show_message("AMLAC Active", "Searching...")
+            else:
+                self.display.show_message("AMLAC Active", "Limited Mode")
         
         # Main loop
         while not self.shutdown_handler.should_shutdown():
@@ -387,20 +669,19 @@ class AMLACRobot:
                 if DEBUG_MODE:
                     print(f"\n--- Loop {self.loop_count} ---")
                 
-                # Process camera sensor at high frequency (10 FPS) - continuous sensor mode
-                # Process multiple times per main loop cycle for real-time detection
-                ml_checks_this_cycle = int(MAIN_LOOP_INTERVAL / ML_INFERENCE_INTERVAL)
-                for _ in range(ml_checks_this_cycle):
-                    if self.ml_processing_timer.has_elapsed(ML_INFERENCE_INTERVAL):
-                        self.ml_result = self.perform_algae_detection()
-                        self.ml_processing_timer.reset()
-                        # Small sleep to maintain processing rate
-                        time.sleep(max(0, ML_INFERENCE_INTERVAL - 0.01))
+                # Process ML detection at high frequency (if available)
+                if self.ml_detector and self.hardware_status['ml_model']:
+                    ml_checks_this_cycle = int(MAIN_LOOP_INTERVAL / ML_INFERENCE_INTERVAL)
+                    for _ in range(ml_checks_this_cycle):
+                        if self.ml_processing_timer.has_elapsed(ML_INFERENCE_INTERVAL):
+                            self.ml_result = self.perform_algae_detection()
+                            self.ml_processing_timer.reset()
+                            time.sleep(max(0, ML_INFERENCE_INTERVAL - 0.01))
                 
                 # Read all other sensors (at normal rate)
                 sensor_data = self.read_all_sensors()
                 
-                # Use latest ML result (from continuous processing)
+                # Use latest ML result
                 ml_result = self.ml_result if self.ml_result else self.perform_algae_detection()
                 
                 # Check safety conditions
@@ -408,15 +689,17 @@ class AMLACRobot:
                 
                 if not is_safe:
                     log_info(f"Safety check failed: {safety_reason}")
-                    self.motors.stop()
-                    self.motors.stop_conveyor()
+                    if self.motors:
+                        self.motors.stop()
+                        self.motors.stop_conveyor()
                     self.state = "safety_stop"
                     
-                    if self.display.initialized:
+                    if self.display and self.hardware_status['display']:
                         self.display.show_message("SAFETY STOP", safety_reason[:16])
                     
                     # Log event
-                    self.logger.log_event('warning', f'Safety stop: {safety_reason}')
+                    if self.logger:
+                        self.logger.log_event('warning', f'Safety stop: {safety_reason}')
                     
                     # Wait before retrying
                     time.sleep(5)
@@ -424,13 +707,13 @@ class AMLACRobot:
                     continue
                 
                 # Handle obstacle avoidance
-                if ENABLE_OBSTACLE_AVOIDANCE:
+                if ENABLE_OBSTACLE_AVOIDANCE and self.hardware_status['ultrasonic']:
                     distance = sensor_data.get('distance_cm', 999)
                     if distance < OBSTACLE_WARNING_DISTANCE:
                         self.handle_obstacle(sensor_data)
                         continue
                 
-                # Execute collection behavior
+                # Execute collection behavior (if motors available)
                 self.execute_collection_behavior(sensor_data, ml_result)
                 
                 # Log telemetry
@@ -446,11 +729,17 @@ class AMLACRobot:
                     print(f"Distance: {sensor_data.get('distance_cm', 'N/A')} cm")
                     print(f"Weight: {sensor_data.get('weight_kg', 'N/A')} kg")
                     print(f"Total algae detected: {self.total_algae_detected}")
+                    
+                    # Show hardware status
+                    hw_ok = sum(1 for v in self.hardware_status.values() if v)
+                    hw_total = len(self.hardware_status)
+                    print(f"Hardware: {hw_ok}/{hw_total} connected")
                 
                 # Check watchdog
                 if self.watchdog.is_expired():
                     log_error("Watchdog expired - system may be unresponsive")
-                    self.logger.log_event('error', 'Watchdog timeout')
+                    if self.logger:
+                        self.logger.log_event('error', 'Watchdog timeout')
                     self.watchdog.feed()
                 
                 # Sleep until next cycle
@@ -469,11 +758,13 @@ class AMLACRobot:
             except Exception as e:
                 log_error("Error in main loop", e)
                 self.state = "error"
-                self.motors.stop()
-                self.motors.stop_conveyor()
+                if self.motors:
+                    self.motors.stop()
+                    self.motors.stop_conveyor()
                 
                 # Log error event
-                self.logger.log_event('error', f'Main loop error: {str(e)}')
+                if self.logger:
+                    self.logger.log_event('error', f'Main loop error: {str(e)}')
                 
                 # Wait before continuing
                 time.sleep(2)
@@ -493,40 +784,56 @@ class AMLACRobot:
         
         # Stop all motors
         log_info("Stopping motors...")
-        self.motors.stop()
-        self.motors.stop_conveyor()
+        if self.motors:
+            self.motors.stop()
+            self.motors.stop_conveyor()
         
         # Log final statistics
         log_info(f"Total loops: {self.loop_count}")
         log_info(f"Total algae detected: {self.total_algae_detected}")
         
         # Save final log entry
-        self.logger.log_event('info', 'System shutdown', {
-            'motor_state': 'stopped',
-            'system_status': 'shutdown'
-        })
+        if self.logger:
+            self.logger.log_event('info', 'System shutdown', {
+                'motor_state': 'stopped',
+                'system_status': 'shutdown'
+            })
         
         # Force flush logs
         log_info("Flushing logs...")
-        self.logger.force_flush()
+        if self.logger:
+            self.logger.force_flush()
         
         # Show shutdown message on display
-        if self.display.initialized:
+        if self.display and self.hardware_status['display']:
             self.display.show_message("AMLAC", "Shutdown")
             time.sleep(1)
         
         # Cleanup all subsystems
         log_info("Cleaning up subsystems...")
-        self.motors.cleanup()
-        self.color_sensor.cleanup()
-        self.ultrasonic_sensor.cleanup()
-        self.imu_sensor.cleanup()
-        self.gps_sensor.cleanup()
-        self.load_cell.cleanup()
-        self.float_switch.cleanup()
-        self.ml_detector.cleanup()
-        self.logger.cleanup()
-        self.display.cleanup()
+        
+        if self.motors:
+            self.motors.cleanup()
+        if self.color_sensor:
+            self.color_sensor.cleanup()
+        if self.ultrasonic_sensor:
+            self.ultrasonic_sensor.cleanup()
+        if self.imu_sensor:
+            self.imu_sensor.cleanup()
+        if self.gps_sensor:
+            self.gps_sensor.cleanup()
+        if self.load_cell:
+            self.load_cell.cleanup()
+        if self.float_switch:
+            self.float_switch.cleanup()
+        if self.ml_detector:
+            self.ml_detector.cleanup()
+        if self.logger:
+            self.logger.cleanup()
+        if self.firebase_logger and self.hardware_status['firebase']:
+            self.firebase_logger.cleanup()
+        if self.display:
+            self.display.cleanup()
         
         print("\n" + "=" * 60)
         print("  Shutdown complete. Goodbye!")
@@ -542,10 +849,10 @@ def main():
         # Create and initialize robot
         robot = AMLACRobot()
         
+        # Always start - graceful degradation handles missing hardware
         if not robot.initialized:
-            print("\nERROR: Robot initialization failed!")
-            print("Please check hardware connections and try again.")
-            sys.exit(1)
+            print("\nWARNING: Robot running in limited mode!")
+            print("Some hardware components are not connected.")
         
         # Start main loop
         robot.main_loop()
@@ -557,4 +864,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

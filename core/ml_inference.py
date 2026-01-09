@@ -17,11 +17,30 @@ except ImportError:
         print("Warning: TFLite runtime not available")
         tflite = None
 
+# Try direct picamera2 import first, then fall back to camera bridge
+Picamera2 = None
+CameraBridge = None
+
 try:
     from picamera2 import Picamera2
-except ImportError:
-    print("Warning: picamera2 not available")
-    Picamera2 = None
+except ImportError as e:
+    error_msg = str(e).lower()
+    if '_libcamera' in error_msg or 'libcamera' in error_msg:
+        print("Note: picamera2 not directly available (libcamera compiled for different Python)")
+        print("  Attempting to use camera bridge via subprocess...")
+    
+    # Try to use camera bridge as fallback
+    try:
+        from core.camera_bridge import CameraBridge
+        print("  ✅ Camera bridge available (will use python3.13 subprocess)")
+    except ImportError:
+        try:
+            # Fallback for direct execution
+            from camera_bridge import CameraBridge
+            print("  ✅ Camera bridge available (will use python3.13 subprocess)")
+        except ImportError:
+            print("Warning: picamera2 and camera bridge both unavailable")
+            CameraBridge = None
 
 from config import (
     MODEL_PATH,
@@ -49,6 +68,8 @@ class AlgaeDetector:
     def __init__(self):
         """Initialize ML model and camera as continuous sensor"""
         self.initialized = False
+        self.camera_initialized = False
+        self.model_initialized = False
         self.interpreter = None
         self.input_details = None
         self.output_details = None
@@ -61,33 +82,46 @@ class AlgaeDetector:
         
         # Load labels
         if not self._load_labels():
-            print("Error: Could not load labels")
-            return
+            print("Warning: Could not load labels, using defaults")
+            self.labels = ['Algae', 'No Algae']
         
         # Load TFLite model (skip if simulating)
         if SIMULATE_SENSORS:
             print("ML inference module running in simulation mode")
             self.initialized = True
+            self.camera_initialized = True
+            self.model_initialized = True
             return
         
-        if not self._load_model():
-            print("Error: Could not load ML model")
-            return
+        # Try to load model (don't fail if unavailable)
+        if self._load_model():
+            self.model_initialized = True
+        else:
+            print("Warning: ML model not loaded - detection unavailable")
         
-        # Initialize camera as continuous sensor
-        if not SIMULATE_SENSORS:
-            self._init_camera()
+        # Initialize camera as continuous sensor (don't fail if unavailable)
+        if self._init_camera():
+            self.camera_initialized = True
+        else:
+            print("Warning: Camera not initialized - using simulated images")
             
-            # Create detection images directory if needed
-            if SAVE_DETECTION_IMAGES:
-                os.makedirs(DETECTION_IMAGES_DIR, exist_ok=True)
+        # Create detection images directory if needed
+        if SAVE_DETECTION_IMAGES:
+            os.makedirs(DETECTION_IMAGES_DIR, exist_ok=True)
         
-        self.initialized = True
+        # System is initialized if either model or camera works
+        # We can still run with partial functionality
+        self.initialized = self.model_initialized
+        
         if DEBUG_MODE:
-            print("ML inference module initialized (continuous sensor mode)")
-            print(f"  Processing rate: ~{1.0/ML_INFERENCE_INTERVAL:.1f} FPS")
-            print(f"  Confirmation frames: {ML_CONFIRMATION_FRAMES}")
-            print(f"  Save detection images: {SAVE_DETECTION_IMAGES}")
+            status = "OK" if self.initialized else "LIMITED"
+            print(f"ML inference module status: {status}")
+            print(f"  Model loaded: {self.model_initialized}")
+            print(f"  Camera ready: {self.camera_initialized}")
+            if self.initialized:
+                print(f"  Processing rate: ~{1.0/ML_INFERENCE_INTERVAL:.1f} FPS")
+                print(f"  Confirmation frames: {ML_CONFIRMATION_FRAMES}")
+                print(f"  Save detection images: {SAVE_DETECTION_IMAGES}")
     
     def _load_labels(self):
         """Load class labels from labels.txt"""
@@ -152,28 +186,41 @@ class AlgaeDetector:
     def _init_camera(self):
         """Initialize Raspberry Pi camera for continuous video streaming (sensor mode)"""
         try:
-            if Picamera2 is None:
-                print("Warning: picamera2 not available, camera disabled")
+            # Try direct picamera2 first
+            if Picamera2 is not None:
+                self.camera = Picamera2()
+                
+                # Configure camera for continuous video preview (sensor mode)
+                # This enables real-time frame capture without gaps
+                config = self.camera.create_preview_configuration(
+                    main={"size": (640, 480)},
+                    buffer_count=3  # Multiple buffers for smooth streaming
+                )
+                self.camera.configure(config)
+                self.camera.start()
+                
+                # Let camera warm up
+                time.sleep(2)
+                
+                if DEBUG_MODE:
+                    print("Camera initialized in continuous video mode (direct picamera2)")
+                
+                return True
+            
+            # Fall back to camera bridge (subprocess to Python 3.13)
+            elif CameraBridge is not None:
+                self.camera = CameraBridge(width=640, height=480)
+                if self.camera.initialized:
+                    if DEBUG_MODE:
+                        print("Camera initialized via camera bridge (python3.13 subprocess)")
+                    return True
+                else:
+                    print("Warning: Camera bridge failed to initialize")
+                    self.camera = None
+                    return False
+            else:
+                print("Warning: No camera backend available (picamera2 and bridge both unavailable)")
                 return False
-            
-            self.camera = Picamera2()
-            
-            # Configure camera for continuous video preview (sensor mode)
-            # This enables real-time frame capture without gaps
-            config = self.camera.create_preview_configuration(
-                main={"size": (640, 480)},
-                buffer_count=3  # Multiple buffers for smooth streaming
-            )
-            self.camera.configure(config)
-            self.camera.start()
-            
-            # Let camera warm up
-            time.sleep(2)
-            
-            if DEBUG_MODE:
-                print("Camera initialized in continuous video mode (sensor mode)")
-            
-            return True
             
         except Exception as e:
             print(f"Error initializing camera: {e}")
@@ -234,14 +281,24 @@ class AlgaeDetector:
             return None
         
         try:
-            # Get the latest frame from continuous video stream
-            # This gets the most recent frame from the video buffer
-            frame = self.camera.capture_array("main")
-            
-            # Convert to PIL Image
-            image = Image.fromarray(frame)
-            
-            return image
+            # Check if using camera bridge or direct picamera2
+            if CameraBridge is not None and isinstance(self.camera, CameraBridge):
+                # Using camera bridge (subprocess mode)
+                frame = self.camera.capture_frame()
+                if frame is not None:
+                    image = Image.fromarray(frame)
+                    return image
+                return None
+            else:
+                # Using direct picamera2
+                # Get the latest frame from continuous video stream
+                # This gets the most recent frame from the video buffer
+                frame = self.camera.capture_array("main")
+                
+                # Convert to PIL Image
+                image = Image.fromarray(frame)
+                
+                return image
             
         except Exception as e:
             if DEBUG_MODE:
@@ -405,8 +462,12 @@ class AlgaeDetector:
         """Clean up resources"""
         try:
             if self.camera:
-                self.camera.stop()
-                self.camera.close()
+                # Handle both direct picamera2 and camera bridge
+                if CameraBridge is not None and isinstance(self.camera, CameraBridge):
+                    self.camera.cleanup()
+                else:
+                    self.camera.stop()
+                    self.camera.close()
             
             if DEBUG_MODE:
                 print("ML inference cleanup complete")

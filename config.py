@@ -19,13 +19,14 @@ os.makedirs(MODELS_DIR, exist_ok=True)
 
 # ==================== GPIO PIN MAPPINGS ====================
 # Motor Driver 1 (L298N) - Paddle Wheels
-MOTOR_LEFT_IN1 = 17      # Left wheel direction pin 1
-MOTOR_LEFT_IN2 = 27      # Left wheel direction pin 2
-MOTOR_LEFT_PWM = 18      # Left wheel speed (PWM)
+# Physical wiring: pins 22,23,13 → LEFT motor, pins 17,27,18 → RIGHT motor
+MOTOR_LEFT_IN1 = 23      # Left wheel direction pin 1 (swapped IN1/IN2 to reverse direction)
+MOTOR_LEFT_IN2 = 22      # Left wheel direction pin 2
+MOTOR_LEFT_PWM = 13      # Left wheel speed (PWM)
 
-MOTOR_RIGHT_IN1 = 22     # Right wheel direction pin 1
-MOTOR_RIGHT_IN2 = 23     # Right wheel direction pin 2
-MOTOR_RIGHT_PWM = 13     # Right wheel speed (PWM)
+MOTOR_RIGHT_IN1 = 17     # Right wheel direction pin 1
+MOTOR_RIGHT_IN2 = 27     # Right wheel direction pin 2
+MOTOR_RIGHT_PWM = 18     # Right wheel speed (PWM)
 
 # Motor Driver 2 (L298N) - Conveyor Belt
 CONVEYOR_IN1 = 24        # Conveyor direction pin 1
@@ -54,6 +55,7 @@ OBSTACLE_WARNING_DISTANCE = 30  # cm (stop if closer than this)
 # Color Sensor (TCS34725)
 COLOR_INTEGRATION_TIME = 0x01  # 2.4ms (fast reading)
 COLOR_GAIN = 0x01              # 4x gain
+WATER_CLEAR_CHANNEL_THRESHOLD = 250  # TCS34725 clear-channel cutoff used to infer clear vs muddy water
 
 # GPS (NEO-6M)
 GPS_SERIAL_PORT = '/dev/serial0'  # UART port
@@ -108,11 +110,14 @@ CSV_HEADERS = [
     'color_r',
     'color_g',
     'color_b',
+    'color_clear',
     'distance_cm',
     'weight_kg',
     'water_level',
+    'water_condition',
     'ml_result',
     'ml_confidence',
+    'actual_label',
     'motor_state',
     'system_status'
 ]

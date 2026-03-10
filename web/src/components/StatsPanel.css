@@ -30,3 +30,9 @@
   letter-spacing: 0.05em;
 }
 
+.stat-subvalue {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+

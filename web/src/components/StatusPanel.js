@@ -1,6 +1,21 @@
 import React from 'react';
 import './StatusPanel.css';
 
+function normalizeLabel(value) {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalized = value.trim().toLowerCase();
+  if (normalized === 'algae') {
+    return 'algae';
+  }
+  if (normalized === 'no algae' || normalized === 'no_algae' || normalized === 'non-algae') {
+    return 'no_algae';
+  }
+  return null;
+}
+
 function StatusPanel({ status, connected }) {
   if (!status || !connected) {
     return (
@@ -48,7 +63,9 @@ function StatusPanel({ status, connected }) {
   };
 
   const mlResult = status.ml?.result || 'N/A';
-  const isAlgae = mlResult.toLowerCase().includes('algae');
+  const isAlgae = normalizeLabel(mlResult) === 'algae';
+  const waterCondition = status.water_condition || 'unknown';
+  const clearChannel = status.sensors?.color?.clear;
 
   return (
     <div className="panel">
@@ -98,6 +115,8 @@ function StatusPanel({ status, connected }) {
           <p><strong>Distance:</strong> {status.sensors?.distance_cm?.toFixed(1) || 'N/A'} cm</p>
           <p><strong>Weight:</strong> {status.sensors?.weight_kg?.toFixed(3) || 'N/A'} kg</p>
           <p><strong>Water Level:</strong> <span className={`badge ${status.sensors?.water_level ? 'badge-success' : 'badge-warning'}`}>{status.sensors?.water_level ? 'Yes' : 'No'}</span></p>
+          <p><strong>Water Condition:</strong> {waterCondition}</p>
+          <p><strong>Clear Channel:</strong> {clearChannel ?? 'N/A'}</p>
         </div>
       </div>
     </div>

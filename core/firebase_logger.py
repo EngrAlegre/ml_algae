@@ -4,6 +4,8 @@ Handles real-time data logging to Firebase Firestore
 """
 
 import os
+import io
+import base64
 from datetime import datetime
 from typing import Dict, Optional
 
@@ -14,6 +16,12 @@ try:
 except ImportError:
     FIREBASE_AVAILABLE = False
     print("Warning: Firebase Admin SDK not available. Install with: pip install firebase-admin")
+
+try:
+    from PIL import Image
+    PIL_AVAILABLE = True
+except ImportError:
+    PIL_AVAILABLE = False
 
 from config import DEBUG_MODE
 
@@ -96,23 +104,28 @@ class FirebaseLogger:
             doc_data = {
                 'timestamp': firestore.SERVER_TIMESTAMP if not data.get('timestamp') else timestamp,
                 'gps': {
-                    'latitude': float(data.get('gps_latitude', 0)) if data.get('gps_latitude') else None,
-                    'longitude': float(data.get('gps_longitude', 0)) if data.get('gps_longitude') else None,
-                    'altitude': float(data.get('gps_altitude', 0)) if data.get('gps_altitude') else None,
+                    'latitude': self._to_float(data.get('gps_latitude')),
+                    'longitude': self._to_float(data.get('gps_longitude')),
+                    'altitude': self._to_float(data.get('gps_altitude')),
                 },
                 'sensors': {
                     'color': {
-                        'r': int(data.get('color_r', 0)) if data.get('color_r') else None,
-                        'g': int(data.get('color_g', 0)) if data.get('color_g') else None,
-                        'b': int(data.get('color_b', 0)) if data.get('color_b') else None,
+                        'r': self._to_int(data.get('color_r')),
+                        'g': self._to_int(data.get('color_g')),
+                        'b': self._to_int(data.get('color_b')),
+                        'clear': self._to_int(data.get('color_clear')),
                     },
-                    'distance_cm': float(data.get('distance_cm', 0)) if data.get('distance_cm') else None,
-                    'weight_kg': float(data.get('weight_kg', 0)) if data.get('weight_kg') else None,
-                    'water_level': bool(data.get('water_level')) if data.get('water_level') else None,
+                    'distance_cm': self._to_float(data.get('distance_cm')),
+                    'weight_kg': self._to_float(data.get('weight_kg')),
+                    'water_level': self._to_bool(data.get('water_level')),
                 },
                 'ml': {
                     'result': data.get('ml_result', ''),
-                    'confidence': float(data.get('ml_confidence', 0)) if data.get('ml_confidence') else 0.0,
+                    'confidence': self._to_float(data.get('ml_confidence'), default=0.0),
+                },
+                'water_condition': data.get('water_condition', ''),
+                'ground_truth': {
+                    'actual_label': data.get('actual_label', ''),
                 },
                 'motor_state': data.get('motor_state', ''),
                 'system_status': data.get('system_status', ''),
@@ -139,6 +152,104 @@ class FirebaseLogger:
         if isinstance(d, dict):
             return {k: self._remove_none_values(v) for k, v in d.items() if v is not None}
         return d
+
+    def _to_float(self, value, default=None):
+        """Convert telemetry values to floats while preserving zeroes."""
+        if value in (None, ''):
+            return default
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return default
+
+    def _to_int(self, value, default=None):
+        """Convert telemetry values to ints while preserving zeroes."""
+        if value in (None, ''):
+            return default
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return default
+
+    def _to_bool(self, value, default=None):
+        """Convert telemetry values to bool without dropping False readings."""
+        if value in (None, ''):
+            return default
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            normalized = value.strip().lower()
+            if normalized in {'true', '1', 'yes'}:
+                return True
+            if normalized in {'false', '0', 'no'}:
+                return False
+        return bool(value)
+    
+    def upload_camera_frame(self, image, ml_result: Optional[Dict] = None) -> bool:
+        """
+        Upload camera frame as base64 JPEG to Firestore
+        Stored in camera_feed/latest document for real-time display
+        
+        Args:
+            image: PIL Image or numpy array
+            ml_result: Optional ML detection result dict
+        
+        Returns:
+            bool: True if uploaded successfully
+        """
+        if not self.initialized or not self.db:
+            return False
+        
+        if not PIL_AVAILABLE:
+            return False
+        
+        try:
+            import numpy as np
+            
+            # Convert numpy array to PIL Image if needed
+            if isinstance(image, np.ndarray):
+                image = Image.fromarray(image)
+            
+            # Resize to reduce payload (320x240 is good for preview)
+            image.thumbnail((320, 240), Image.BILINEAR)
+            
+            # Convert to RGB if needed
+            if image.mode != 'RGB':
+                image = image.convert('RGB')
+            
+            # Compress to JPEG and encode as base64
+            buffer = io.BytesIO()
+            image.save(buffer, format='JPEG', quality=60)
+            img_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+            
+            # Prepare document data
+            doc_data = {
+                'image': img_base64,
+                'timestamp': firestore.SERVER_TIMESTAMP,
+                'width': image.width,
+                'height': image.height,
+            }
+            
+            # Add ML result if provided
+            if ml_result:
+                doc_data['ml'] = {
+                    'result': ml_result.get('label', ''),
+                    'confidence': float(ml_result.get('confidence', 0)),
+                    'is_algae': ml_result.get('is_algae', False),
+                }
+            
+            # Update single document (overwrite latest)
+            self.db.collection('camera_feed').document('latest').set(doc_data)
+            
+            if DEBUG_MODE:
+                print(f"Camera frame uploaded ({len(img_base64)} bytes base64)")
+            
+            return True
+            
+        except Exception as e:
+            if DEBUG_MODE:
+                print(f"Error uploading camera frame: {e}")
+            return False
     
     def log_event(self, event_type: str, description: str, additional_data: Optional[Dict] = None) -> bool:
         """

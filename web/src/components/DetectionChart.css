@@ -1,0 +1,138 @@
+.chart-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Detection summary */
+.detection-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.summary-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.algae-dot {
+  background: var(--algae);
+}
+
+.no-algae-dot {
+  background: var(--accent);
+}
+
+.summary-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.summary-count {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.summary-bar {
+  flex: 1;
+  min-width: 100px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 3px;
+  overflow: hidden;
+  opacity: 0.3;
+}
+
+.summary-bar-fill {
+  height: 100%;
+  background: var(--algae);
+  opacity: 1;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* Chart wrapper */
+.chart-wrapper {
+  padding: 8px 0;
+}
+
+.chart-section-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 12px 0 4px 0;
+}
+
+/* Custom tooltip */
+.chart-tooltip {
+  background: #1e293b;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip-time {
+  color: var(--muted);
+  margin: 0 0 4px 0;
+  font-size: 0.8rem;
+}
+
+.tooltip-result {
+  margin: 2px 0;
+  font-weight: 600;
+}
+
+.tooltip-confidence {
+  margin: 2px 0;
+  color: var(--text);
+}
+
+.tooltip-detail {
+  margin: 2px 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.text-algae {
+  color: var(--algae);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+/* Empty state */
+.chart-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+}
+
+.chart-empty p {
+  margin: 4px 0;
+}
+
+.chart-empty-hint {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+/* Recharts overrides */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--border);
+  opacity: 0.5;
+}

@@ -20,6 +20,7 @@ from config import (
     WATCHDOG_TIMEOUT,
     ALGAE_APPROACH_SPEED,
     PADDLE_DEFAULT_SPEED,
+    WATER_CLEAR_CHANNEL_THRESHOLD,
     DEBUG_MODE,
     ROBOT_NAME,
     ROBOT_VERSION
@@ -361,14 +362,17 @@ class AMLACRobot:
                 sensor_data['color_r'] = color_data['r']
                 sensor_data['color_g'] = color_data['g']
                 sensor_data['color_b'] = color_data['b']
+                sensor_data['color_clear'] = color_data.get('clear')
             else:
                 sensor_data['color_r'] = 0
                 sensor_data['color_g'] = 0
                 sensor_data['color_b'] = 0
+                sensor_data['color_clear'] = None
         else:
             sensor_data['color_r'] = 0
             sensor_data['color_g'] = 0
             sensor_data['color_b'] = 0
+            sensor_data['color_clear'] = None
         
         # Read ultrasonic sensor
         if self.ultrasonic_sensor and self.hardware_status['ultrasonic']:
@@ -576,6 +580,14 @@ class AMLACRobot:
         """
         try:
             motor_state = self.motors.get_state() if self.motors else "unavailable"
+            color_clear = sensor_data.get('color_clear')
+
+            if color_clear is None:
+                water_condition = 'unknown'
+            elif color_clear >= WATER_CLEAR_CHANNEL_THRESHOLD:
+                water_condition = 'clear'
+            else:
+                water_condition = 'muddy'
             
             log_data = {
                 'gps_latitude': sensor_data.get('gps_latitude', ''),
@@ -584,11 +596,14 @@ class AMLACRobot:
                 'color_r': sensor_data.get('color_r', ''),
                 'color_g': sensor_data.get('color_g', ''),
                 'color_b': sensor_data.get('color_b', ''),
+                'color_clear': color_clear,
                 'distance_cm': sensor_data.get('distance_cm', ''),
                 'weight_kg': sensor_data.get('weight_kg', ''),
                 'water_level': sensor_data.get('water_level', ''),
+                'water_condition': water_condition,
                 'ml_result': ml_result.get('label', ''),
                 'ml_confidence': ml_result.get('confidence', ''),
+                'actual_label': sensor_data.get('actual_label', ''),
                 'motor_state': motor_state,
                 'system_status': self.state
             }
@@ -600,6 +615,16 @@ class AMLACRobot:
             # Log to Firebase (real-time database)
             if self.firebase_logger and self.hardware_status['firebase']:
                 self.firebase_logger.log(log_data)
+                
+                # Upload camera frame every 5 loops (~5 seconds) to avoid excessive uploads
+                if self.loop_count % 5 == 0 and self.ml_detector and self.hardware_status['camera']:
+                    try:
+                        frame = self.ml_detector.capture_frame()
+                        if frame is not None:
+                            self.firebase_logger.upload_camera_frame(frame, ml_result)
+                    except Exception as cam_err:
+                        if DEBUG_MODE:
+                            print(f"Camera frame upload error: {cam_err}")
             
         except Exception as e:
             log_error("Error logging telemetry", e)

@@ -1,5 +1,289 @@
 .dashboard-content {
-  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Sensor Gauges */
+.gauges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.gauge-card {
+  background: #0c1324;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.gauge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.gauge-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.gauge-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.gauge-unit {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.gauge-bar-container {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.gauge-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease, background-color 0.3s ease;
+  min-width: 2px;
+}
+
+.gauge-range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+/* System Status Cards */
+.system-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.system-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #0c1324;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  transition: border-color 0.3s ease;
+}
+
+.system-card.card-active {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.system-card.card-warning {
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.system-card.card-idle {
+  border-color: var(--border);
+}
+
+.system-card-icon {
+  color: var(--muted);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.card-active .system-card-icon {
+  color: var(--success);
+  opacity: 1;
+}
+
+.card-warning .system-card-icon {
+  color: var(--warning);
+  opacity: 1;
+}
+
+.system-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.system-card-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.system-card-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.value-active {
+  color: var(--success);
+}
+
+.value-warning {
+  color: var(--warning);
+}
+
+.value-idle {
   color: var(--muted);
 }
 
+/* Color Sensor Display */
+.color-display {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #0c1324;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.color-preview {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.color-values {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.color-channel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.channel-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: 14px;
+  text-align: center;
+}
+
+.channel-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.channel-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.channel-value {
+  font-size: 0.8rem;
+  color: var(--muted);
+  width: 30px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hardware Indicators */
+.hw-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hw-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #0c1324;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.hw-indicator.hw-ok {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.hw-indicator.hw-fail {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.hw-dot {
+  font-size: 10px;
+}
+
+.hw-ok .hw-dot {
+  color: var(--success);
+}
+
+.hw-fail .hw-dot {
+  color: var(--error);
+}
+
+.hw-label {
+  color: var(--muted);
+}
+
+.hw-ok .hw-label {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .gauges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .system-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .color-display {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .color-preview {
+    width: 100%;
+    height: 40px;
+  }
+}

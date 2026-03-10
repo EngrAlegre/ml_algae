@@ -8,6 +8,10 @@
   background: #0b1222;
   border-bottom: 1px solid var(--border);
   padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
 }
 
 .header-content {
@@ -82,6 +86,9 @@
   margin: 0 auto;
   padding: 24px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .app-footer {
@@ -93,12 +100,26 @@
   font-size: 0.9rem;
 }
 
+/* Layout grids */
+.main-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.top-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.bottom-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Panel base styles */
 .panel {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px;
-  margin-bottom: 20px;
 }
 
 .panel-header {
@@ -127,9 +148,17 @@
   gap: 16px;
 }
 
+@media (max-width: 1024px) {
+  .top-grid,
+  .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .app-main {
     padding: 12px;
+    gap: 12px;
   }
   
   .grid {
@@ -142,4 +171,3 @@
     gap: 12px;
   }
 }
-

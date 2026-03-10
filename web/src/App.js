@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, query, orderBy, limit, onSnapshot, doc } from 'firebase/firestore';
 import firebaseConfig from './firebase-config';
 import './App.css';
+import CameraFeed from './components/CameraFeed';
 import Dashboard from './components/Dashboard';
 import StatusPanel from './components/StatusPanel';
 import StatsPanel from './components/StatsPanel';
+import DetectionChart from './components/DetectionChart';
 import LogsTable from './components/LogsTable';
 
 // Initialize Firebase
@@ -15,6 +17,7 @@ const db = getFirestore(app);
 // Connection timeout threshold (in seconds)
 // If no data received within this time, consider robot disconnected
 const CONNECTION_TIMEOUT_SECONDS = 30;
+const WATER_CLEAR_CHANNEL_THRESHOLD = 250;
 
 // Helper function to convert Firestore timestamp to Date (outside component)
 function getDateFromTimestamp(ts) {
@@ -63,15 +66,102 @@ function formatTimeAgo(secondsAgo) {
   return `${days} day${days > 1 ? 's' : ''} ago`;
 }
 
+function normalizeLabel(value) {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalized = value.trim().toLowerCase();
+  if (normalized === 'algae') {
+    return 'algae';
+  }
+  if (normalized === 'no algae' || normalized === 'no_algae' || normalized === 'non-algae') {
+    return 'no_algae';
+  }
+  return null;
+}
+
+function getPredictedLabel(log) {
+  return normalizeLabel(log.ml?.result || log.ml_result);
+}
+
+function getActualLabel(log) {
+  return normalizeLabel(log.ground_truth?.actual_label || log.actual_label);
+}
+
+function getWaterCondition(log) {
+  const explicitCondition = (log.water_condition || log.sensors?.water_condition || '').toLowerCase();
+  if (explicitCondition === 'muddy' || explicitCondition === 'clear') {
+    return explicitCondition;
+  }
+
+  const clearValue = log.sensors?.color?.clear ?? log.sensors?.color_clear ?? log.color_clear;
+  const numericClear = typeof clearValue === 'number' ? clearValue : Number(clearValue);
+
+  if (!Number.isNaN(numericClear)) {
+    return numericClear >= WATER_CLEAR_CHANNEL_THRESHOLD ? 'clear' : 'muddy';
+  }
+
+  return 'unknown';
+}
+
+function calculateConfusionMetrics(logs) {
+  const metrics = {
+    tp: 0,
+    tn: 0,
+    fp: 0,
+    fn: 0,
+    totalLabeled: 0,
+    accuracy: null,
+  };
+
+  logs.forEach((log) => {
+    const predicted = getPredictedLabel(log);
+    const actual = getActualLabel(log);
+
+    if (!predicted || !actual) {
+      return;
+    }
+
+    metrics.totalLabeled += 1;
+
+    if (predicted === 'algae' && actual === 'algae') {
+      metrics.tp += 1;
+    } else if (predicted === 'no_algae' && actual === 'no_algae') {
+      metrics.tn += 1;
+    } else if (predicted === 'algae' && actual === 'no_algae') {
+      metrics.fp += 1;
+    } else if (predicted === 'no_algae' && actual === 'algae') {
+      metrics.fn += 1;
+    }
+  });
+
+  if (metrics.totalLabeled > 0) {
+    metrics.accuracy = ((metrics.tp + metrics.tn) / metrics.totalLabeled) * 100;
+  }
+
+  return metrics;
+}
+
+function calculateConditionMetrics(logs, condition) {
+  return calculateConfusionMetrics(logs.filter((log) => getWaterCondition(log) === condition));
+}
+
 function App() {
   const [latestStatus, setLatestStatus] = useState(null);
   const [recentLogs, setRecentLogs] = useState([]);
+  const [cameraData, setCameraData] = useState(null);
   const [stats, setStats] = useState({
     totalLogs: 0,
     algaeDetections: 0,
-    maxWeight: 0,
+    maxWeight: '0.000',
     collectionEvents: 0,
-    successRate: 0
+    labeledLogs: 0,
+    unlabeledLogs: 0,
+    confusion: { tp: 0, tn: 0, fp: 0, fn: 0 },
+    overallAccuracy: null,
+    muddyMetrics: { tp: 0, tn: 0, fp: 0, fn: 0, totalLabeled: 0, accuracy: null },
+    clearMetrics: { tp: 0, tn: 0, fp: 0, fn: 0, totalLabeled: 0, accuracy: null }
   });
   const [connected, setConnected] = useState(false);
   const [lastSeenText, setLastSeenText] = useState('Never');
@@ -121,9 +211,9 @@ function App() {
       q,
       (snapshot) => {
         if (!snapshot.empty) {
-          const doc = snapshot.docs[0];
-          const data = doc.data();
-          const docId = doc.id;
+          const docSnap = snapshot.docs[0];
+          const data = docSnap.data();
+          const docId = docSnap.id;
           
           setLatestStatus({ id: docId, ...data });
           
@@ -175,19 +265,22 @@ function App() {
     const unsubscribeLogs = onSnapshot(
       logsQuery,
       (snapshot) => {
-        const logs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const logs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
         setRecentLogs(logs);
         
         // Calculate stats
         const total = logs.length;
         const algaeCount = logs.filter(log => 
-          log.ml?.result?.toLowerCase() === 'algae'
+          getPredictedLabel(log) === 'algae'
         ).length;
         const weights = logs
           .map(log => log.sensors?.weight_kg)
           .filter(w => w != null)
           .map(w => parseFloat(w));
         const maxWeight = weights.length > 0 ? Math.max(...weights) : 0;
+        const confusion = calculateConfusionMetrics(logs);
+        const muddyMetrics = calculateConditionMetrics(logs, 'muddy');
+        const clearMetrics = calculateConditionMetrics(logs, 'clear');
         
         // Count collection events (state changes from forward to stopped)
         let collectionEvents = 0;
@@ -204,7 +297,17 @@ function App() {
           algaeDetections: algaeCount,
           maxWeight: maxWeight.toFixed(3),
           collectionEvents,
-          successRate: total > 0 ? ((algaeCount / total) * 100).toFixed(1) : 0
+          labeledLogs: confusion.totalLabeled,
+          unlabeledLogs: total - confusion.totalLabeled,
+          confusion: {
+            tp: confusion.tp,
+            tn: confusion.tn,
+            fp: confusion.fp,
+            fn: confusion.fn,
+          },
+          overallAccuracy: confusion.accuracy,
+          muddyMetrics,
+          clearMetrics,
         });
       },
       (error) => {
@@ -212,9 +315,24 @@ function App() {
       }
     );
 
+    // Subscribe to camera feed
+    const cameraDocRef = doc(db, 'camera_feed', 'latest');
+    const unsubscribeCamera = onSnapshot(
+      cameraDocRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          setCameraData(docSnap.data());
+        }
+      },
+      (error) => {
+        console.error('Error listening to camera feed:', error);
+      }
+    );
+
     return () => {
       unsubscribe();
       unsubscribeLogs();
+      unsubscribeCamera();
     };
   }, []); // Run once on mount
 
@@ -236,9 +354,22 @@ function App() {
       </header>
 
       <main className="app-main">
-        <StatusPanel status={connected ? latestStatus : null} connected={connected} />
+        {/* Row 1: Camera + Status */}
+        <div className="main-grid top-grid">
+          <CameraFeed cameraData={cameraData} connected={connected} />
+          <StatusPanel status={connected ? latestStatus : null} connected={connected} />
+        </div>
+
+        {/* Row 2: Stats */}
         <StatsPanel stats={stats} />
-        <Dashboard status={connected ? latestStatus : null} />
+
+        {/* Row 3: System Overview + Detection Chart */}
+        <div className="main-grid bottom-grid">
+          <Dashboard status={connected ? latestStatus : null} connected={connected} />
+          <DetectionChart logs={recentLogs} />
+        </div>
+
+        {/* Row 4: Logs */}
         <LogsTable logs={recentLogs.slice(0, 20)} />
       </main>
 
@@ -250,4 +381,3 @@ function App() {
 }
 
 export default App;
-

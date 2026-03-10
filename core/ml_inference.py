@@ -230,6 +230,7 @@ class AlgaeDetector:
     def _preprocess_image(self, image):
         """
         Preprocess image for model input
+        Automatically detects if model expects UINT8 or FLOAT32
         
         Args:
             image: PIL Image or numpy array
@@ -249,11 +250,16 @@ class AlgaeDetector:
             if image.mode != 'RGB':
                 image = image.convert('RGB')
             
-            # Convert to numpy array
-            img_array = np.array(image, dtype=np.float32)
+            # Check what data type the model expects
+            input_dtype = self.input_details[0]['dtype']
             
-            # Normalize to [0, 1] range
-            img_array = img_array / 255.0
+            if input_dtype == np.uint8:
+                # Model expects UINT8 (0-255) - quantized model
+                img_array = np.array(image, dtype=np.uint8)
+            else:
+                # Model expects FLOAT32 (0.0-1.0) - non-quantized model
+                img_array = np.array(image, dtype=np.float32)
+                img_array = img_array / 255.0
             
             # Add batch dimension
             img_array = np.expand_dims(img_array, axis=0)
@@ -366,8 +372,14 @@ class AlgaeDetector:
             output_data = self.interpreter.get_tensor(self.output_details[0]['index'])
             inference_time = time.time() - start_time
             
-            # Get predictions
-            scores = output_data[0]
+            # Get predictions and normalize if quantized
+            scores = output_data[0].astype(np.float32)
+            
+            # Check if output is quantized (UINT8) and scale to 0-1
+            output_dtype = self.output_details[0]['dtype']
+            if output_dtype == np.uint8:
+                # Quantized output: scale from 0-255 to 0-1
+                scores = scores / 255.0
             
             # Get top prediction
             top_index = np.argmax(scores)

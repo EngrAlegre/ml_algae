@@ -1,0 +1,618 @@
+timestamp,gps_latitude,gps_longitude,gps_altitude,color_r,color_g,color_b,distance_cm,weight_kg,water_level,ml_result,ml_confidence,motor_state,system_status
+2026-03-10T00:00:11.809860,,,,102,102,51,125.42,0,True,Algae,0.9882352948188782,stopped,running
+2026-03-10T00:00:23.969542,,,,102,102,51,288.78,0,True,Algae,0.9803921580314636,forward_speed_100,running
+2026-03-10T00:00:35.928327,,,,102,102,51,117.16,0,True,Algae,1.0,stopped,running
+2026-03-10T00:00:48.020742,,,,102,102,51,202.34,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:00:59.795381,,,,102,102,51,95.69,0,True,Algae,1.0,stopped,running
+2026-03-10T00:01:12.333918,,,,102,102,51,289.17,0,True,Algae,0.9529411792755127,forward_speed_100,running
+2026-03-10T00:01:24.265707,,,,102,102,51,95.65,0,True,Algae,1.0,stopped,running
+2026-03-10T00:01:36.167895,,,,102,102,51,288.6,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:01:47.885572,,,,102,102,51,189.38,0,True,Algae,0.9921568632125854,stopped,running
+2026-03-10T00:01:59.984925,,,,102,102,51,289.2,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:02:11.930652,,,,102,102,51,85.54,0,True,Algae,0.9882352948188782,stopped,running
+2026-03-10T00:02:24.123417,,,,102,102,51,289.66,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:02:35.868966,,,,102,102,51,195.77,0,True,Algae,1.0,stopped,running
+2026-03-10T00:02:47.975828,,,,102,102,51,289.12,0,True,Algae,0.9725490212440491,forward_speed_100,running
+2026-03-10T00:02:59.911553,,,,102,102,51,176.54,0,True,Algae,1.0,stopped,running
+2026-03-10T00:03:11.989420,,,,102,102,51,288.95,0,True,Algae,0.9529411792755127,forward_speed_100,running
+2026-03-10T00:03:23.926976,,,,102,102,51,176.08,0,True,Algae,0.9882352948188782,stopped,running
+2026-03-10T00:03:36.011785,,,,102,102,51,289.63,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:03:48.236686,,,,102,102,51,140.12,0,True,Algae,1.0,stopped,running
+2026-03-10T00:04:00.328824,,,,102,102,51,288.94,0,True,Algae,0.9921568632125854,forward_speed_100,running
+2026-03-10T00:04:12.706560,,,,102,102,51,154.51,0,True,Algae,0.9803921580314636,stopped,running
+2026-03-10T00:04:24.885881,,,,102,102,51,289.71,0,True,Algae,0.9725490212440491,forward_speed_100,running
+2026-03-10T00:04:36.827585,,,,102,102,51,167.73,0,True,Algae,1.0,stopped,running
+2026-03-10T00:04:48.922167,,,,102,102,51,289.7,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:05:00.634794,,,,102,102,51,177.05,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:05:12.798723,,,,102,102,51,289.62,0,True,Algae,0.9921568632125854,forward_speed_100,running
+2026-03-10T00:05:24.936669,,,,102,102,51,163.82,0,True,Algae,1.0,stopped,running
+2026-03-10T00:05:37.089705,,,,102,102,51,290.22,0,True,Algae,0.9921568632125854,forward_speed_100,running
+2026-03-10T00:05:48.819627,,,,102,102,51,150.35,0,True,Algae,1.0,stopped,running
+2026-03-10T00:06:00.896775,,,,102,102,51,289.47,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:06:12.911614,,,,102,102,51,180.81,0,True,Algae,1.0,stopped,running
+2026-03-10T00:06:25.042036,,,,102,102,51,289.96,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:06:37.754047,,,,102,102,51,149.67,0,True,Algae,1.0,stopped,running
+2026-03-10T00:06:49.809822,,,,102,102,51,288.61,0,True,Algae,0.9529411792755127,forward_speed_100,running
+2026-03-10T00:07:01.746601,,,,102,102,51,161.24,0,True,Algae,0.9921568632125854,stopped,running
+2026-03-10T00:07:13.859383,,,,102,102,51,289.04,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:07:25.861778,,,,102,102,51,47.14,0,True,Algae,1.0,stopped,running
+2026-03-10T00:07:37.964235,,,,102,102,51,289.22,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:07:49.870436,,,,102,102,51,86.68,0,True,Algae,0.9647058844566345,stopped,running
+2026-03-10T00:08:01.941888,,,,102,102,51,288.61,0,True,Algae,0.7450980544090271,forward_speed_100,running
+2026-03-10T00:08:14.088654,,,,102,102,51,155.02,0,True,Algae,1.0,stopped,running
+2026-03-10T00:08:26.168640,,,,102,102,51,289.57,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:08:38.152783,,,,102,102,51,150.29,0,True,Algae,0.9843137264251709,stopped,running
+2026-03-10T00:08:50.418671,,,,102,102,51,289.45,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:09:02.400854,,,,102,102,51,165.31,0,True,Algae,1.0,stopped,running
+2026-03-10T00:09:14.519104,,,,102,102,51,288.92,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:09:26.458591,,,,102,102,51,138.94,0,True,Algae,1.0,stopped,running
+2026-03-10T00:09:38.587675,,,,102,102,51,288.52,0,True,Algae,0.9176470637321472,forward_speed_100,running
+2026-03-10T00:09:50.510605,,,,102,102,51,186.51,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:10:02.587175,,,,102,102,51,290.33,0,True,Algae,0.9882352948188782,forward_speed_100,running
+2026-03-10T00:10:14.529390,,,,102,102,51,100.35,0,True,Algae,1.0,stopped,running
+2026-03-10T00:10:26.830537,,,,102,102,51,289.71,0,True,Algae,0.9882352948188782,forward_speed_100,running
+2026-03-10T00:10:38.754982,,,,102,102,51,157.94,0,True,Algae,1.0,stopped,running
+2026-03-10T00:10:50.849966,,,,102,102,51,288.93,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:11:02.646610,,,,102,102,51,147.77,0,True,Algae,1.0,stopped,running
+2026-03-10T00:11:14.547086,,,,102,102,51,289.62,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:11:26.468682,,,,102,102,51,99.78,0,True,Algae,1.0,stopped,running
+2026-03-10T00:11:38.535957,,,,102,102,51,289.46,0,True,Algae,0.9882352948188782,forward_speed_100,running
+2026-03-10T00:11:50.332782,,,,102,102,51,126.06,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:12:02.414642,,,,102,102,51,289.48,0,True,Algae,0.9372549057006836,forward_speed_100,running
+2026-03-10T00:12:14.373569,,,,102,102,51,111.92,0,True,Algae,0.9921568632125854,stopped,running
+2026-03-10T00:12:26.454179,,,,102,102,51,296.17,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:12:38.407642,,,,102,102,51,132.49,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:12:50.374034,,,,102,102,51,289.84,0,True,Algae,0.9843137264251709,forward_speed_100,running
+2026-03-10T00:13:02.301031,,,,102,102,51,149.99,0,True,Algae,1.0,stopped,running
+2026-03-10T00:13:14.456167,,,,102,102,51,289.62,0,True,Algae,0.9843137264251709,forward_speed_100,running
+2026-03-10T00:13:26.433407,,,,102,102,51,187.38,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:13:38.319322,,,,102,102,51,289.89,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:13:50.265408,,,,102,102,51,71.14,0,True,Algae,1.0,stopped,running
+2026-03-10T00:14:02.369274,,,,102,102,51,288.58,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:14:14.100007,,,,102,102,51,166.87,0,True,Algae,0.9803921580314636,stopped,running
+2026-03-10T00:14:26.167171,,,,102,102,51,290.01,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:14:37.967491,,,,102,102,51,185.21,0,True,Algae,0.9882352948188782,stopped,running
+2026-03-10T00:14:49.867894,,,,102,102,51,288.39,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:15:01.883820,,,,102,102,51,109.09,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:15:14.171304,,,,102,102,51,288.73,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:15:25.904667,,,,102,102,51,189.32,0,True,Algae,0.9843137264251709,stopped,running
+2026-03-10T00:15:37.995829,,,,102,102,51,250.72,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:15:49.732623,,,,102,102,51,149.73,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:16:01.841440,,,,102,102,51,288.94,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:16:13.852119,,,,102,102,51,99.56,0,True,Algae,1.0,stopped,running
+2026-03-10T00:16:25.718812,,,,102,102,51,288.95,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:16:37.671979,,,,102,102,51,109.32,0,True,Algae,1.0,stopped,running
+2026-03-10T00:16:49.841747,,,,102,102,51,289.8,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:17:01.769495,,,,102,102,51,169.49,0,True,Algae,0.9647058844566345,stopped,running
+2026-03-10T00:17:13.879197,,,,102,102,51,288.93,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:17:25.900867,,,,102,102,51,163.76,0,True,Algae,1.0,stopped,running
+2026-03-10T00:17:38.023993,,,,102,102,51,288.45,0,True,Algae,0.8941176533699036,forward_speed_100,running
+2026-03-10T00:17:50.177656,,,,102,102,51,174.53,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:18:02.440732,,,,102,102,51,288.32,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:18:14.389472,,,,102,102,51,41.3,0,True,Algae,1.0,stopped,running
+2026-03-10T00:18:26.482106,,,,102,102,51,289.24,0,True,Algae,0.9725490212440491,forward_speed_100,running
+2026-03-10T00:18:38.456694,,,,102,102,51,159.03,0,True,Algae,1.0,stopped,running
+2026-03-10T00:18:50.511721,,,,102,102,51,289.31,0,True,Algae,0.9882352948188782,forward_speed_100,running
+2026-03-10T00:19:02.451583,,,,102,102,51,149.17,0,True,Algae,0.9882352948188782,stopped,running
+2026-03-10T00:19:14.533108,,,,102,102,51,288.64,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:19:26.450440,,,,102,102,51,164.03,0,True,Algae,1.0,stopped,running
+2026-03-10T00:19:38.532107,,,,102,102,51,289.87,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:19:50.248972,,,,102,102,51,172.6,0,True,Algae,0.9725490212440491,stopped,running
+2026-03-10T00:20:02.395966,,,,102,102,51,295.41,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:20:14.343493,,,,102,102,51,180.74,0,True,Algae,1.0,stopped,running
+2026-03-10T00:20:26.486508,,,,102,102,51,290.22,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:20:38.417818,,,,102,102,51,103.94,0,True,Algae,0.9843137264251709,stopped,running
+2026-03-10T00:20:50.291233,,,,102,102,51,289.51,0,True,Algae,0.9882352948188782,forward_speed_100,running
+2026-03-10T00:21:02.236172,,,,102,102,51,159.5,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:21:14.443224,,,,102,102,51,289.45,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:21:26.407887,,,,102,102,51,83.62,0,True,Algae,1.0,stopped,running
+2026-03-10T00:21:38.593775,,,,102,102,51,288.97,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:21:50.597609,,,,102,102,51,159.76,0,True,Algae,1.0,stopped,running
+2026-03-10T00:22:02.816840,,,,102,102,51,289.0,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:22:14.726815,,,,102,102,51,148.39,0,True,Algae,1.0,stopped,running
+2026-03-10T00:22:26.915168,,,,102,102,51,289.22,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:22:38.918655,,,,102,102,51,176.9,0,True,Algae,1.0,stopped,running
+2026-03-10T00:22:50.997775,,,,102,102,51,289.24,0,True,Algae,0.9647058844566345,forward_speed_100,running
+2026-03-10T00:23:02.893388,,,,102,102,51,173.89,0,True,Algae,1.0,stopped,running
+2026-03-10T00:23:14.988041,,,,102,102,51,289.88,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:23:26.886570,,,,102,102,51,183.31,0,True,Algae,1.0,stopped,running
+2026-03-10T00:23:38.972293,,,,102,102,51,290.08,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:23:50.879768,,,,102,102,51,119.4,0,True,Algae,1.0,stopped,running
+2026-03-10T00:24:02.960291,,,,102,102,51,288.22,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:24:14.882988,,,,102,102,51,115.84,0,True,Algae,1.0,stopped,running
+2026-03-10T00:24:26.980728,,,,102,102,51,288.64,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:24:38.934115,,,,102,102,51,178.25,0,True,Algae,0.9960784316062927,stopped,running
+2026-03-10T00:24:51.166788,,,,102,102,51,289.21,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:25:03.122518,,,,102,102,51,141.95,0,True,Algae,1.0,stopped,running
+2026-03-10T00:25:15.222710,,,,102,102,51,288.9,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:25:27.116468,,,,102,102,51,111.03,0,True,Algae,1.0,stopped,running
+2026-03-10T00:25:39.195946,,,,102,102,51,289.39,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:25:51.108433,,,,102,102,51,32.73,0,True,Algae,1.0,stopped,running
+2026-03-10T00:26:03.557517,,,,102,102,51,289.24,0,True,Algae,0.6901960968971252,stopped,running
+2026-03-10T00:26:16.000412,,,,102,102,51,289.16,0,True,Algae,1.0,stopped,running
+2026-03-10T00:26:28.053109,,,,102,102,51,289.64,0,True,Algae,0.9647058844566345,forward_speed_100,running
+2026-03-10T00:26:40.110600,,,,102,102,51,173.48,0,True,Algae,1.0,stopped,running
+2026-03-10T00:26:52.444704,,,,102,102,51,289.17,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:27:04.364121,,,,102,102,51,160.1,0,True,Algae,0.9803921580314636,stopped,running
+2026-03-10T00:27:16.440182,,,,102,102,51,289.57,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:27:28.209630,,,,102,102,51,139.61,0,True,Algae,0.9803921580314636,stopped,running
+2026-03-10T00:27:40.361649,,,,102,102,51,290.08,0,True,Algae,0.9921568632125854,forward_speed_100,running
+2026-03-10T00:27:52.309636,,,,102,102,51,180.53,0,True,Algae,0.9176470637321472,stopped,running
+2026-03-10T00:28:04.211198,,,,102,102,51,289.05,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:28:15.955396,,,,102,102,51,168.92,0,True,Algae,1.0,stopped,running
+2026-03-10T00:28:28.038056,,,,102,102,51,289.02,0,True,Algae,0.9647058844566345,forward_speed_100,running
+2026-03-10T00:28:39.974666,,,,102,102,51,165.15,0,True,Algae,0.9921568632125854,stopped,running
+2026-03-10T00:28:52.106415,,,,102,102,51,289.52,0,True,Algae,0.9529411792755127,forward_speed_100,running
+2026-03-10T00:29:04.049626,,,,102,102,51,159.34,0,True,Algae,0.9843137264251709,stopped,running
+2026-03-10T00:29:16.132041,,,,102,102,51,288.52,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:29:28.195823,,,,102,102,51,168.4,0,True,Algae,1.0,stopped,running
+2026-03-10T00:29:40.351899,,,,102,102,51,289.03,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T00:29:52.256611,,,,102,102,51,102.29,0,True,Algae,0.9843137264251709,stopped,running
+2026-03-10T00:30:04.153041,,,,102,102,51,289.02,0,True,Algae,0.9803921580314636,forward_speed_100,running
+2026-03-10T00:30:16.147651,,,,102,102,51,138.97,0,True,Algae,1.0,stopped,running
+2026-03-10T00:30:28.405949,,,,102,102,51,289.84,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:30:40.436663,,,,102,102,51,168.53,0,True,Algae,0.9921568632125854,stopped,running
+2026-03-10T00:30:52.569947,,,,102,102,51,289.41,0,True,Algae,0.9725490212440491,forward_speed_100,running
+2026-03-10T00:31:04.552646,,,,102,102,51,167.17,0,True,Algae,0.9882352948188782,stopped,running
+2026-03-10T00:31:16.751511,,,,102,102,51,250.8,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:31:28.520976,,,,102,102,51,174.13,0,True,Algae,1.0,stopped,running
+2026-03-10T00:31:40.648594,,,,102,102,51,289.5,0,True,Algae,0.9921568632125854,forward_speed_100,running
+2026-03-10T00:31:52.710515,,,,102,102,51,177.74,0,True,Algae,1.0,stopped,running
+2026-03-10T00:32:04.904627,,,,102,102,51,289.0,0,True,Algae,0.9843137264251709,forward_speed_100,running
+                                                                                                                                                                                  2026-03-10T00:32:46.368201,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T00:33:02.812122,,,,143,132,132,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:33:47.113100,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:33:58.651380,,,,146,130,132,334.76,0,True,Algae,1.0,stopped,running
+2026-03-10T00:34:53.401554,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:35:05.092786,,,,150,133,135,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:36:02.790813,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:36:14.153742,,,,133,125,125,268.9,0,True,Algae,1.0,stopped,running
+2026-03-10T00:37:11.398742,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:37:23.087790,,,,152,135,136,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:38:01.143623,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:38:12.805424,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:38:29.525990,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:38:46.081564,,,,151,134,135,400,0,True,Algae,1.0,stopped,running
+2026-03-10T00:39:37.015726,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:39:48.508022,,,,145,131,132,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:40:41.779101,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:40:53.447423,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:41:10.143654,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:41:26.851798,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:41:43.548795,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:42:00.105765,,,,147,134,134,400,0,True,Algae,1.0,stopped,running
+2026-03-10T00:42:57.370233,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:43:09.084327,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:43:25.779431,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:43:42.463256,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:43:59.159985,,,,135,125,128,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T00:44:42.751132,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:44:54.402341,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T00:45:10.949968,,,,133,119,119,400,0,True,Algae,1.0,stopped,running
+2026-03-10T00:46:00.997276,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T00:46:12.714220,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:46:29.439092,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:46:46.109934,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:47:02.587047,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:47:19.272351,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:47:36.001252,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:47:52.700096,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:48:09.389002,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:48:26.086474,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:48:42.800095,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:48:59.507412,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:49:16.191036,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:49:32.920001,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:49:49.621305,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:50:06.307758,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:50:22.993091,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:50:39.678190,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:50:56.379634,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:51:13.079280,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:51:29.558936,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:51:46.248077,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:52:02.935770,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:52:19.403915,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:52:36.084436,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:52:52.784479,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:53:09.476992,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:53:26.176033,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:53:42.855035,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:53:59.362000,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:54:16.113281,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:54:32.807827,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:54:49.537382,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:55:06.252865,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:55:22.937055,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:55:39.435175,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:55:56.140158,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:56:12.785208,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:56:29.449079,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:56:45.928525,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:57:02.600428,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:57:19.252309,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:57:35.905762,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:57:52.369935,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:58:08.806101,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:58:25.463071,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:58:42.153324,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:58:58.822112,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:59:15.507171,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:59:32.231000,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T00:59:48.931694,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:00:05.618222,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:00:22.312118,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:00:38.985742,,,,149,135,137,33.48,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:01:38.831477,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:01:50.337826,,,,152,135,138,249.77,0,True,Algae,1.0,stopped,running
+2026-03-10T01:02:40.890663,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:02:52.559262,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:03:09.243846,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T01:03:25.913268,,,,151,134,136,32.45,0,True,Algae,1.0,forward_speed_100,running
+                                                                                                                                                          2026-03-10T01:03:02.315981,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T01:03:18.934557,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T01:03:35.560787,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T01:03:52.204954,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.4cm)
+2026-03-10T01:04:08.850047,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T01:04:25.502533,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (23.1cm)
+2026-03-10T01:04:42.345203,,,,145,133,121,192.05,0,True,Algae,0.8313725590705872,stopped,running
+2026-03-10T01:05:24.065309,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:05:35.726886,,,,150,127,127,42.05,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:06:34.244517,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:06:45.545172,,,,147,134,120,39.22,0,True,Algae,1.0,stopped,running
+2026-03-10T01:07:42.824759,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:07:54.466221,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (29.6cm)
+2026-03-10T01:08:11.116444,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T01:08:27.785388,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T01:08:44.791782,,,,147,134,120,32.03,0,True,Algae,1.0,stopped,running
+2026-03-10T01:09:33.799526,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:09:45.809166,,,,145,133,121,157.4,0,True,No Algae,0.5686274766921997,stopped,running
+2026-03-10T01:10:41.633572,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:10:53.638309,,,,145,133,121,31.41,0,True,No Algae,0.8313725590705872,stopped,running
+2026-03-10T01:11:53.529649,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:12:05.539743,,,,145,133,121,38.18,0,True,Algae,0.5686274766921997,stopped,running
+2026-03-10T01:12:43.935587,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:12:55.389808,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (28.1cm)
+2026-03-10T01:13:12.403125,,,,145,133,121,34.32,0,True,No Algae,0.7450980544090271,stopped,running
+2026-03-10T01:14:12.547143,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:14:24.202030,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.9cm)
+2026-03-10T01:14:40.854467,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T01:14:57.680201,,,,145,133,121,37.52,0,True,No Algae,0.9372549057006836,stopped,running
+2026-03-10T01:15:39.646350,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:15:51.675394,,,,145,133,121,157.74,0,True,No Algae,0.6901960968971252,stopped,running
+2026-03-10T01:16:43.156216,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:16:54.814765,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T01:17:11.514326,,,,145,133,121,400,0,True,Algae,0.7450980544090271,forward_speed_100,running
+2026-03-10T01:17:54.989514,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:18:06.644781,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (23.6cm)
+2026-03-10T01:18:23.294576,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (28.4cm)
+                                                                                          2026-03-10T01:18:09.932229,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T01:18:26.555466,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (24.2cm)
+2026-03-10T01:18:43.204004,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (26.4cm)
+2026-03-10T01:19:00.250025,,,,145,133,121,157.34,0,True,No Algae,0.5686274766921997,stopped,running
+2026-03-10T01:19:59.576202,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:20:11.608206,,,,133,133,121,159.72,0,True,No Algae,0.9372549057006836,stopped,running
+2026-03-10T01:20:56.487381,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:21:08.508627,,,,140,127,114,157.86,0,True,No Algae,0.6313725709915161,stopped,running
+2026-03-10T01:22:08.191183,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:22:19.890478,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:22:36.573051,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:22:53.278909,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:23:10.327845,,,,140,127,114,400,0,True,No Algae,0.7921568751335144,stopped,running
+2026-03-10T01:23:51.706338,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:24:03.368381,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:24:20.390735,,,,140,127,114,192.57,0,True,No Algae,0.8313725590705872,stopped,running
+2026-03-10T01:25:05.843385,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:25:17.866393,,,,140,127,114,193.83,0,True,No Algae,0.5686274766921997,stopped,running
+2026-03-10T01:26:00.764268,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:26:12.406864,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T01:26:29.421803,,,,140,127,114,41.58,0,True,Algae,1.0,stopped,running
+2026-03-10T01:27:20.191514,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:27:31.843658,,,,155,141,127,33.45,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:28:31.782374,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:28:43.091945,,,,127,127,106,74.22,0,True,Algae,0.6901960968971252,forward_speed_128,running
+2026-03-10T01:29:26.009168,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:29:38.030425,,,,135,120,105,160.18,0,True,No Algae,0.9529411792755127,stopped,running
+2026-03-10T01:30:22.051243,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:30:34.075050,,,,141,127,113,192.91,0,True,Algae,1.0,stopped,running
+2026-03-10T01:28:16.334758,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (28.6cm)
+2026-03-10T01:28:32.958716,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:28:49.934573,,,,136,119,102,32.78,0,True,No Algae,0.9647058844566345,stopped,running
+2026-03-10T01:29:48.472525,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:28:18.090169,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:28:34.707791,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:28:51.368871,,,,136,119,119,400,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T01:29:47.758749,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:29:59.277426,,,,143,127,127,160.0,0,True,Algae,1.0,stopped,running
+2026-03-10T01:30:48.079204,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:30:59.740871,,,,143,127,111,157.8,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:31:44.804521,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:31:56.450249,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T01:32:13.133954,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:32:29.782992,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:32:46.103531,,,,143,127,127,157.75,0,True,Algae,1.0,stopped,running
+2026-03-10T01:33:36.829936,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:33:48.490647,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:34:05.181959,,,,150,135,120,112.83,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:34:55.147785,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:35:06.661659,,,,150,135,120,33.47,0,True,Algae,1.0,stopped,running
+2026-03-10T01:35:48.338788,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:36:00.021911,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (23.2cm)
+2026-03-10T01:36:16.480922,,,,143,127,111,159.97,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:37:06.960741,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:37:18.473263,,,,143,127,111,148.47,0,True,Algae,1.0,stopped,running
+2026-03-10T01:38:07.060177,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:38:18.719009,,,,143,127,111,156.84,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:39:02.133176,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:39:13.448397,,,,143,127,111,110.59,0,True,Algae,1.0,stopped,running
+2026-03-10T01:40:06.021174,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:40:17.685597,,,,143,127,127,157.32,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:41:08.396273,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:41:19.901476,,,,153,136,119,157.26,0,True,Algae,1.0,stopped,running
+2026-03-10T01:42:19.780072,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:42:31.437733,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T01:42:47.895246,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T01:43:04.566141,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T01:43:21.233678,,,,136,136,119,157.3,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:44:21.363228,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:44:32.891755,,,,153,136,119,145.57,0,True,Algae,1.0,stopped,running
+2026-03-10T01:45:14.405597,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:45:26.072000,,,,143,127,111,113.2,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:46:12.763513,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:46:24.072020,,,,136,136,119,156.87,0,True,Algae,1.0,stopped,running
+2026-03-10T01:47:17.177452,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:47:28.630143,,,,135,135,120,115.02,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:48:15.291532,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:48:26.602502,,,,150,135,120,156.99,0,True,Algae,1.0,stopped,running
+2026-03-10T01:49:10.321137,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:49:21.982662,,,,153,136,119,157.61,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:50:12.184997,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:50:23.695361,,,,143,127,111,73.79,0,True,Algae,1.0,stopped,running
+2026-03-10T01:51:08.557731,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:51:20.568359,,,,134,120,107,157.59,0,True,No Algae,1.0,stopped,running
+2026-03-10T01:52:14.272546,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:52:26.296357,,,,136,119,119,156.57,0,True,Algae,1.0,stopped,running
+2026-03-10T01:53:22.165229,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:53:33.829090,,,,127,113,113,157.25,0,True,Algae,0.9921568632125854,forward_speed_100,running
+2026-03-10T01:54:31.357303,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:54:42.869766,,,,135,120,105,114.95,0,True,Algae,1.0,stopped,running
+2026-03-10T01:55:35.521673,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:55:46.991617,,,,127,127,111,156.93,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:56:35.845496,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:56:47.362314,,,,140,127,114,43.5,0,True,No Algae,1.0,forward_speed_128,running
+2026-03-10T01:57:41.295646,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T01:57:53.115472,,,,134,120,107,139.28,0,True,No Algae,1.0,stopped,running
+                                                                2026-03-10T01:58:35.334488,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:58:51.999512,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:59:08.676847,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:59:25.377226,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:59:42.105828,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:59:58.801135,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:00:15.492586,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:00:32.186224,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:00:48.876126,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:05.563960,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:22.217831,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:38.916123,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:55.573110,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:02:12.644712,,,,136,128,132,400,0,True,Algae,0.8941176533699036,stopped,running
+                                                                2026-03-10T01:58:36.810145,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T01:58:53.463243,,,,153,134,136,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T01:59:50.389079,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:00:02.046149,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:00:18.748094,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:00:35.410280,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:00:52.081188,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:08.773294,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:25.465989,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:42.143641,,,,,,,,,,,,,WARNING: Safety stop: No water detected
+2026-03-10T02:01:58.692874,,,,141,124,126,400,0,True,Algae,1.0,forward_speed_128,running
+2026-03-10T02:02:45.839504,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:02:57.494247,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (28.3cm)
+2026-03-10T02:03:14.156574,,,,139,127,126,75.72,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:03:57.582236,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:04:09.091878,,,,137,124,122,72.48,0,True,Algae,1.0,stopped,running
+2026-03-10T02:04:59.833900,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:05:11.520572,,,,118,116,121,400,0,True,Algae,0.9529411792755127,forward_speed_100,running
+2026-03-10T02:06:05.978372,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:06:17.500057,,,,138,129,129,30.62,0,True,Algae,1.0,stopped,running
+2026-03-10T02:07:09.397791,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:07:21.044306,,,,130,124,127,62.63,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:08:14.819640,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:08:26.335808,,,,137,127,130,33.21,0,True,Algae,1.0,stopped,running
+2026-03-10T02:09:14.854193,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:09:26.519321,,,,131,123,127,53.62,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:10:17.939685,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:10:29.443023,,,,124,118,118,31.26,0,True,No Algae,1.0,forward_speed_128,running
+2026-03-10T02:11:28.640774,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:11:40.279564,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (25.4cm)
+2026-03-10T02:11:56.975429,,,,111,114,123,400,0,True,Algae,0.9803921580314636,forward_speed_100,running
+2026-03-10T02:12:43.875872,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:12:55.534402,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:13:12.090052,,,,151,133,136,400,0,True,Algae,1.0,stopped,running
+2026-03-10T02:14:01.791361,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:14:13.841884,,,,136,124,120,400,0,True,No Algae,1.0,stopped,running
+2026-03-10T02:15:06.040155,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:15:18.106275,,,,143,129,131,400,0,True,No Algae,1.0,stopped,running
+2026-03-10T02:16:18.100365,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:16:30.149952,,,,145,132,132,116.71,0,True,Algae,1.0,stopped,running
+2026-03-10T02:17:22.269526,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:17:33.947798,,,,140,129,131,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:18:27.878496,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:18:39.405964,,,,123,121,126,53.87,0,True,Algae,1.0,stopped,running
+2026-03-10T02:19:30.876390,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:19:42.895852,,,,138,127,130,113.99,0,True,No Algae,0.8941176533699036,stopped,running
+2026-03-10T02:20:19.876912,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:20:31.886884,,,,150,136,140,147.4,0,True,Algae,0.8313725590705872,stopped,running
+2026-03-10T02:21:25.815731,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:21:37.862025,,,,131,125,129,400,0,True,Algae,0.5686274766921997,stopped,running
+2026-03-10T02:22:19.030402,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:22:30.888983,,,,138,128,131,400,0,True,Algae,1.0,stopped,running
+2026-03-10T02:23:14.902274,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:23:26.558127,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T02:23:43.212327,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:23:59.877199,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:24:16.524266,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:24:33.180103,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:24:49.837489,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:25:06.523519,,,,162,141,144,400,0,True,Algae,0.9882352948188782,forward_speed_100,running
+2026-03-10T02:25:54.235136,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:26:05.743952,,,,144,130,130,117.76,0,True,Algae,1.0,stopped,running
+2026-03-10T02:26:44.224314,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:26:56.079882,,,,138,124,124,400,0,True,No Algae,1.0,stopped,running
+2026-03-10T02:27:53.275075,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:28:04.924800,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:28:21.382451,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:28:38.055324,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.9cm)
+2026-03-10T02:28:54.716339,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T02:29:11.393575,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:29:28.049415,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:29:44.708764,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:30:01.362247,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (23.8cm)
+2026-03-10T02:30:18.025263,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:30:34.680319,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:30:51.336087,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.4cm)
+2026-03-10T02:31:07.975167,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:31:24.621199,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.4cm)
+2026-03-10T02:31:41.669318,,,,125,116,118,400,0,True,No Algae,0.6313725709915161,stopped,running
+                                                                                                                                                2026-03-10T02:28:53.731311,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:29:10.357108,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:29:27.380243,,,,139,119,129,400,0,True,Algae,0.8666666746139526,stopped,running
+2026-03-10T02:30:09.729076,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:28:55.009437,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:29:11.630605,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:29:28.253548,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:29:45.257064,,,,142,131,133,78.69,0,True,Algae,1.0,stopped,running
+2026-03-10T02:30:37.430507,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:30:48.933909,,,,139,129,133,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:31:33.276522,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:31:44.789771,,,,133,126,131,102.06,0,True,Algae,1.0,stopped,running
+2026-03-10T02:32:44.717810,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:32:56.378419,,,,141,130,132,30.65,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:33:49.804679,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:34:01.110568,,,,137,129,133,30.64,0,True,Algae,1.0,stopped,running
+2026-03-10T02:34:52.740490,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:35:04.414704,,,,148,133,137,31.78,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:35:53.818730,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:36:05.490853,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (29.7cm)
+2026-03-10T02:36:22.002221,,,,142,131,134,31.98,0,True,Algae,1.0,stopped,running
+2026-03-10T02:37:20.073126,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:37:31.768515,,,,135,127,132,400,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:38:27.062555,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:38:38.573946,,,,133,127,131,30.32,0,True,Algae,1.0,stopped,running
+2026-03-10T02:39:22.556692,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:39:34.199902,,,,136,127,132,30.14,0,True,Algae,0.9960784316062927,forward_speed_100,running
+2026-03-10T02:40:14.827672,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:40:26.144570,,,,155,138,138,30.68,0,True,Algae,1.0,stopped,running
+2026-03-10T02:41:16.647969,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:41:28.308113,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (29.2cm)
+2026-03-10T02:41:44.956284,,,,140,131,133,30.0,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:42:36.258405,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:42:47.753024,,,,173,145,146,30.52,0,True,Algae,1.0,stopped,running
+2026-03-10T02:43:40.276781,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:43:51.927017,,,,165,141,143,30.07,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:44:51.320926,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:45:02.833747,,,,147,134,136,30.95,0,True,Algae,1.0,stopped,running
+2026-03-10T02:45:52.554517,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:46:04.017498,,,,149,133,136,30.58,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:46:55.345619,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:47:06.850210,,,,127,121,124,33.64,0,True,Algae,1.0,stopped,running
+2026-03-10T02:47:53.998227,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:48:05.634492,,,,135,123,123,30.99,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T02:48:58.726462,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:49:10.245807,,,,133,125,125,33.22,0,True,Algae,1.0,stopped,running
+2026-03-10T02:50:03.295542,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:50:14.956085,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (29.3cm)
+2026-03-10T02:50:31.622312,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (28.5cm)
+2026-03-10T02:50:48.283293,,,,127,121,121,30.64,0,True,Algae,0.9921568632125854,forward_speed_100,running
+2026-03-10T02:51:33.159483,,,,,,,,,,,,,ERROR: Watchdog timeout
+2026-03-10T02:51:44.803558,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T02:52:01.454547,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T02:52:18.107307,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T02:52:34.813373,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:52:51.455947,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:53:08.111398,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.4cm)
+2026-03-10T02:53:24.771027,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:53:41.420001,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:53:58.078539,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T02:54:14.525522,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:54:31.184236,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:54:47.872383,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T02:55:04.539683,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T02:55:21.187315,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:55:37.842578,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:55:54.506111,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+                                                                                          2026-03-10T02:54:09.212132,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T02:54:25.852189,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T02:54:42.587225,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (23.0cm)
+2026-03-10T20:50:07.210652,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.9cm)
+2026-03-10T20:50:23.927035,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.9cm)
+2026-03-10T20:50:40.410523,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.8cm)
+2026-03-10T20:50:57.186991,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T20:51:13.949250,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (24.9cm)
+2026-03-10T20:51:30.704229,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (24.4cm)
+2026-03-10T20:51:47.486101,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T20:52:04.088162,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (24.8cm)
+2026-03-10T20:52:20.869064,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (24.5cm)
+2026-03-10T20:52:37.535273,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (24.5cm)
+2026-03-10T20:52:54.169066,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.5cm)
+2026-03-10T20:53:10.939166,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.6cm)
+2026-03-10T20:53:27.673969,,,,102,102,51,31.77,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:53:41.760789,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (22.7cm)
+2026-03-10T20:53:58.444081,,,,102,102,51,242.7,0,True,Algae,1.0,stopped,running
+2026-03-10T20:54:10.609101,,,,102,102,51,40.76,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:54:22.815713,,,,102,102,51,36.58,0,True,Algae,1.0,stopped,running
+2026-03-10T20:54:35.104924,,,,102,102,51,37.38,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:54:47.136712,,,,102,102,51,121.39,0,True,Algae,1.0,stopped,running
+2026-03-10T20:54:59.253009,,,,102,102,51,252.11,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:55:11.173332,,,,102,102,51,129.29,0,True,Algae,1.0,stopped,running
+2026-03-10T20:55:23.404770,,,,102,102,51,253.66,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:55:35.489942,,,,102,102,51,31.77,0,True,Algae,1.0,stopped,running
+2026-03-10T20:55:47.721075,,,,102,102,51,38.08,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:55:59.588941,,,,102,102,51,132.8,0,True,Algae,1.0,stopped,running
+2026-03-10T20:56:11.792386,,,,102,102,51,219.86,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:56:24.008837,,,,102,102,51,106.84,0,True,Algae,1.0,stopped,running
+2026-03-10T20:56:36.257042,,,,102,102,51,218.02,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:56:48.306494,,,,102,102,51,73.33,0,True,Algae,1.0,stopped,running
+2026-03-10T20:57:00.486813,,,,102,102,51,275.46,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:57:12.669755,,,,102,102,51,95.35,0,True,Algae,1.0,stopped,running
+2026-03-10T20:57:24.930072,,,,102,102,51,207.41,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T20:57:37.129657,,,,,,,,,,,,,WARNING: Safety stop: Obstacle too close (23.4cm)
+2026-03-10T20:57:53.774779,,,,102,102,51,241.67,0,True,Algae,1.0,stopped,running
+2026-03-10T20:58:05.992484,,,,102,102,51,217.63,0,True,Algae,1.0,forward_speed_100,running
+                                                                                 2026-03-10T21:09:00.405102,,,,102,102,51,208.61,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:09:13.941355,,,,102,102,51,52.33,0,True,Algae,1.0,stopped,running
+2026-03-10T21:09:26.023467,,,,102,102,51,195.8,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:09:37.978218,,,,102,102,51,98.67,0,True,Algae,1.0,stopped,running
+2026-03-10T21:09:50.041684,,,,102,102,51,194.72,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:10:02.018689,,,,102,102,51,106.96,0,True,Algae,1.0,stopped,running
+2026-03-10T21:10:14.095513,,,,102,102,51,192.92,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:10:26.028522,,,,102,102,51,84.5,0,True,Algae,1.0,stopped,running
+2026-03-10T21:10:38.130972,,,,102,102,51,192.97,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:10:50.172482,,,,102,102,51,78.61,0,True,Algae,1.0,stopped,running
+2026-03-10T21:11:02.256788,,,,102,102,51,193.82,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:11:14.216489,,,,102,102,51,144.45,0,True,Algae,1.0,stopped,running
+2026-03-10T21:11:26.141721,,,,102,102,51,195.39,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:11:38.089439,,,,102,102,51,106.58,0,True,Algae,1.0,stopped,running
+2026-03-10T21:11:50.184275,,,,102,102,51,277.09,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:12:02.123078,,,,102,102,51,187.97,0,True,Algae,1.0,stopped,running
+2026-03-10T21:12:14.313569,,,,102,102,51,255.44,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:12:26.294501,,,,102,102,51,183.28,0,True,Algae,1.0,stopped,running
+2026-03-10T21:12:38.366755,,,,102,102,51,266.37,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:12:50.320447,,,,102,102,51,196.78,0,True,Algae,1.0,stopped,running
+2026-03-10T21:13:02.486911,,,,102,102,51,277.62,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:13:14.430983,,,,102,102,51,185.48,0,True,Algae,1.0,stopped,running
+2026-03-10T21:13:26.669822,,,,102,102,51,239.08,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:13:38.435704,,,,102,102,51,117.58,0,True,Algae,1.0,stopped,running
+2026-03-10T21:13:50.516677,,,,102,102,51,256.33,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:14:02.451606,,,,102,102,51,157.76,0,True,Algae,1.0,stopped,running
+2026-03-10T21:14:14.549635,,,,102,102,51,179.2,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:14:26.489805,,,,102,102,51,147.49,0,True,Algae,1.0,stopped,running
+2026-03-10T21:14:38.709354,,,,102,102,51,189.52,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:14:50.651668,,,,102,102,51,122.22,0,True,Algae,1.0,stopped,running
+2026-03-10T21:15:02.765924,,,,102,102,51,264.3,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:15:14.701637,,,,102,102,51,145.29,0,True,Algae,1.0,stopped,running
+2026-03-10T21:15:26.822013,,,,102,102,51,264.24,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:15:38.786531,,,,102,102,51,34.04,0,True,Algae,1.0,stopped,running
+2026-03-10T21:15:50.874783,,,,102,102,51,261.52,0,True,Algae,1.0,forward_speed_100,running
+2026-03-10T21:16:02.834960,,,,102,102,51,90.29,0,True,Algae,1.0,stopped,running

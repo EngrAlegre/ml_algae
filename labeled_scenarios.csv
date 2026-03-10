@@ -1,0 +1,372 @@
+﻿timestamp,gps_latitude,gps_longitude,gps_altitude,color_r,color_g,color_b,distance_cm,weight_kg,water_level,ml_result,ml_confidence,motor_state,system_status,actual_label,water_condition,scenario
+2026-03-10T20:53:27.673969,,,,102,102,51,31.77,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:53:58.444081,,,,102,102,51,242.7,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:54:10.609101,,,,102,102,51,40.76,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:54:22.815713,,,,102,102,51,36.58,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:54:35.104924,,,,102,102,51,37.38,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:54:47.136712,,,,102,102,51,121.39,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:54:59.253009,,,,102,102,51,252.11,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:55:11.173332,,,,102,102,51,129.29,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:55:23.404770,,,,102,102,51,253.66,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:55:35.489942,,,,102,102,51,31.77,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:55:47.721075,,,,102,102,51,38.08,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:55:59.588941,,,,102,102,51,132.8,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:56:11.792386,,,,102,102,51,219.86,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:56:24.008837,,,,102,102,51,106.84,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:56:36.257042,,,,102,102,51,218.02,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:56:48.306494,,,,102,102,51,73.33,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:57:00.486813,,,,102,102,51,275.46,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:57:12.669755,,,,102,102,51,95.35,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:57:24.930072,,,,102,102,51,207.41,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:57:53.774779,,,,102,102,51,241.67,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T20:58:05.992484,,,,102,102,51,217.63,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:09:13.941355,,,,102,102,51,52.33,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:09:26.023467,,,,102,102,51,195.8,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:09:37.978218,,,,102,102,51,98.67,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:09:50.041684,,,,102,102,51,194.72,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:10:02.018689,,,,102,102,51,106.96,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:10:14.095513,,,,102,102,51,192.92,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:10:26.028522,,,,102,102,51,84.5,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:10:38.130972,,,,102,102,51,192.97,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:10:50.172482,,,,102,102,51,78.61,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:11:02.256788,,,,102,102,51,193.82,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:11:14.216489,,,,102,102,51,144.45,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:11:26.141721,,,,102,102,51,195.39,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:11:38.089439,,,,102,102,51,106.58,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:11:50.184275,,,,102,102,51,277.09,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:12:02.123078,,,,102,102,51,187.97,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:12:14.313569,,,,102,102,51,255.44,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:12:26.294501,,,,102,102,51,183.28,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:12:38.366755,,,,102,102,51,266.37,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:12:50.320447,,,,102,102,51,196.78,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:13:02.486911,,,,102,102,51,277.62,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:13:14.430983,,,,102,102,51,185.48,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:13:26.669822,,,,102,102,51,239.08,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:13:38.435704,,,,102,102,51,117.58,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:13:50.516677,,,,102,102,51,256.33,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:14:02.451606,,,,102,102,51,157.76,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:14:14.549635,,,,102,102,51,179.2,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:14:26.489805,,,,102,102,51,147.49,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:14:38.709354,,,,102,102,51,189.52,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:14:50.651668,,,,102,102,51,122.22,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:15:02.765924,,,,102,102,51,264.3,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:15:14.701637,,,,102,102,51,145.29,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:15:26.822013,,,,102,102,51,264.24,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:15:38.786531,,,,102,102,51,34.04,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:15:50.874783,,,,102,102,51,261.52,0,True,Algae,1.0,forward_speed_100,running,Algae,clear,Clear_Algae_Present
+2026-03-10T21:16:02.834960,,,,102,102,51,90.29,0,True,Algae,1.0,stopped,running,Algae,clear,Clear_Algae_Present
+2026-03-09T22:17:52.984479,,,,102,102,51,289.04,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:18:06.131497,,,,102,102,51,171.75,0,True,Algae,0.9725490212440491,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:18:18.492106,,,,102,102,51,289.08,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:18:30.479040,,,,102,102,51,143.45,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:18:42.615772,,,,102,102,51,288.66,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:18:54.534770,,,,102,102,51,51.85,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:19:06.492834,,,,102,102,51,288.65,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:19:18.293391,,,,102,102,51,166.03,0,True,Algae,0.9843137264251709,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:19:30.191312,,,,102,102,51,288.92,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:19:42.159982,,,,102,102,51,168.66,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:19:54.277770,,,,102,102,51,288.05,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:20:06.208329,,,,102,102,51,131.0,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:20:18.319313,,,,102,102,51,288.8,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:20:30.492460,,,,102,102,51,192.84,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:20:42.875871,,,,102,102,51,288.85,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:20:54.826037,,,,102,102,51,40.59,0,True,Algae,0.8666666746139526,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:21:07.002078,,,,102,102,51,288.44,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:21:19.036994,,,,102,102,51,159.28,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:21:31.219119,,,,102,102,51,288.94,0,True,Algae,0.9176470637321472,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:21:43.221737,,,,102,102,51,169.58,0,True,Algae,0.9647058844566345,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:21:55.497216,,,,102,102,51,289.18,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:22:07.474744,,,,102,102,51,51.88,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:22:19.577571,,,,102,102,51,288.88,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:22:31.752909,,,,102,102,51,132.72,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:22:43.875987,,,,102,102,51,288.52,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:22:55.817672,,,,102,102,51,121.75,0,True,Algae,0.9176470637321472,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:23:07.927997,,,,102,102,51,288.79,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:23:20.139944,,,,102,102,51,136.95,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:23:32.449132,,,,102,102,51,293.12,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:23:44.437949,,,,102,102,51,183.08,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:23:56.571942,,,,102,102,51,288.61,0,True,Algae,0.9647058844566345,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:24:08.403164,,,,102,102,51,148.88,0,True,Algae,0.9725490212440491,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:24:20.662044,,,,102,102,51,288.56,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:24:32.463895,,,,102,102,51,170.92,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:24:44.573402,,,,102,102,51,288.99,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:24:56.483616,,,,102,102,51,163.39,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:25:09.161108,,,,102,102,51,294.86,0,True,No Algae,0.8941176533699036,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:25:21.614714,,,,102,102,51,288.77,0,True,Algae,0.9803921580314636,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:25:33.788646,,,,102,102,51,288.2,0,True,Algae,0.7921568751335144,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:25:45.820675,,,,102,102,51,173.61,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:25:58.060609,,,,102,102,51,289.56,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:26:10.008362,,,,102,102,51,54.86,0,True,Algae,0.6313725709915161,forward_speed_128,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:26:22.502868,,,,102,102,51,140.04,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:26:34.587762,,,,102,102,51,289.71,0,True,Algae,0.9372549057006836,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:26:46.531585,,,,102,102,51,180.39,0,True,Algae,0.9372549057006836,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:26:58.643306,,,,102,102,51,289.79,0,True,Algae,0.9372549057006836,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:27:10.402992,,,,102,102,51,181.66,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:27:22.497902,,,,102,102,51,290.04,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:27:34.497996,,,,102,102,51,169.14,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:27:46.711893,,,,102,102,51,290.02,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:27:58.805581,,,,102,102,51,164.81,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:28:11.130994,,,,102,102,51,289.12,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:28:23.083702,,,,102,102,51,164.09,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:28:35.337629,,,,102,102,51,289.22,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:28:47.293008,,,,102,102,51,98.5,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:28:59.744831,,,,102,102,51,289.17,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:29:11.733998,,,,102,102,51,171.69,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:29:23.815186,,,,102,102,51,289.59,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:29:35.585015,,,,102,102,51,141.12,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:29:47.754705,,,,102,102,51,289.22,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:29:59.769773,,,,102,102,51,180.72,0,True,Algae,0.9803921580314636,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:30:11.951849,,,,102,102,51,290.01,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:30:24.013781,,,,102,102,51,176.68,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:30:36.388180,,,,102,102,51,289.64,0,True,Algae,0.9529411792755127,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:30:48.244392,,,,102,102,51,35.39,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:31:00.574269,,,,102,102,51,289.0,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:31:12.930929,,,,102,102,51,176.25,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:31:25.256778,,,,102,102,51,288.93,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:31:37.394196,,,,102,102,51,125.45,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:31:49.648614,,,,102,102,51,289.19,0,True,Algae,0.7921568751335144,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:32:01.851628,,,,102,102,51,170.0,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:32:14.172028,,,,102,102,51,288.87,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:32:26.296306,,,,102,102,51,189.59,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:32:38.617741,,,,102,102,51,288.8,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:32:50.699835,,,,102,102,51,94.55,0,True,Algae,0.9921568632125854,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:33:03.021584,,,,102,102,51,289.15,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:33:15.182350,,,,102,102,51,196.61,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:33:27.442926,,,,102,102,51,289.12,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:33:39.599479,,,,102,102,51,109.06,0,True,Algae,0.8313725590705872,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:33:51.890271,,,,102,102,51,289.26,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:34:03.993556,,,,102,102,51,66.86,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:34:16.217771,,,,102,102,51,288.65,0,True,Algae,0.9372549057006836,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:34:28.472654,,,,102,102,51,140.86,0,True,Algae,0.9176470637321472,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:34:40.898090,,,,102,102,51,289.84,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:34:53.019034,,,,102,102,51,159.02,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:35:05.422578,,,,102,102,51,288.13,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:35:17.722502,,,,102,102,51,158.62,0,True,Algae,0.9372549057006836,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:35:30.016304,,,,102,102,51,295.72,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:35:42.323127,,,,102,102,51,143.23,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:35:54.557439,,,,102,102,51,290.42,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:36:06.687351,,,,102,102,51,106.14,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:36:18.976127,,,,102,102,51,295.5,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:36:31.068307,,,,102,102,51,130.66,0,True,Algae,0.9921568632125854,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:36:43.545841,,,,102,102,51,289.35,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:36:55.917980,,,,102,102,51,128.72,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:37:08.247090,,,,102,102,51,290.47,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:37:20.542431,,,,102,102,51,185.62,0,True,Algae,0.9372549057006836,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:37:32.793737,,,,102,102,51,288.86,0,True,Algae,0.9529411792755127,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:37:44.936218,,,,102,102,51,188.2,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:37:57.201920,,,,102,102,51,289.26,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:38:09.308995,,,,102,102,51,184.17,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:38:21.554350,,,,102,102,51,289.75,0,True,Algae,0.9647058844566345,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:38:33.516846,,,,102,102,51,214.33,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:38:45.644352,,,,102,102,51,288.85,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:38:57.656889,,,,102,102,51,184.38,0,True,Algae,0.9843137264251709,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:39:09.899986,,,,102,102,51,289.18,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:39:21.887084,,,,102,102,51,219.27,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:39:33.995358,,,,102,102,51,289.08,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:39:45.971240,,,,102,102,51,169.37,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:39:58.129168,,,,102,102,51,289.1,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:40:10.207426,,,,102,102,51,177.69,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:40:22.437664,,,,102,102,51,289.14,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:40:34.623151,,,,102,102,51,215.36,0,True,Algae,0.9921568632125854,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:40:46.599541,,,,102,102,51,288.67,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:40:58.436892,,,,102,102,51,132.68,0,True,Algae,0.9647058844566345,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:41:10.544409,,,,102,102,51,289.01,0,True,Algae,0.9529411792755127,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:41:22.480254,,,,102,102,51,149.69,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:41:34.570492,,,,102,102,51,288.32,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:41:46.547887,,,,102,102,51,86.69,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:41:58.527746,,,,102,102,51,288.75,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:42:10.508491,,,,102,102,51,175.86,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:42:22.701488,,,,102,102,51,289.13,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:42:34.727830,,,,102,102,51,181.22,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:42:46.824975,,,,102,102,51,289.04,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:42:58.824679,,,,102,102,51,140.67,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:43:10.925997,,,,102,102,51,288.72,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:43:22.950903,,,,102,102,51,164.29,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:43:35.033828,,,,102,102,51,289.11,0,True,Algae,0.9647058844566345,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:43:47.000328,,,,102,102,51,162.96,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:43:59.302580,,,,102,102,51,288.99,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:44:11.278770,,,,102,102,51,147.92,0,True,Algae,0.9176470637321472,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:44:23.667566,,,,102,102,51,242.47,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:44:35.680662,,,,102,102,51,172.18,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:44:47.795681,,,,102,102,51,288.55,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:44:59.916684,,,,102,102,51,155.24,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:45:12.226925,,,,102,102,51,289.43,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:45:24.232039,,,,102,102,51,166.7,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:45:36.371563,,,,102,102,51,289.44,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:45:48.346779,,,,102,102,51,178.33,0,True,Algae,0.9803921580314636,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:46:00.434135,,,,102,102,51,289.12,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:46:12.447782,,,,102,102,51,147.09,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:46:24.534352,,,,102,102,51,288.78,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:46:36.513823,,,,102,102,51,159.07,0,True,Algae,0.9725490212440491,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:46:48.416084,,,,102,102,51,289.11,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:47:00.384622,,,,102,102,51,165.69,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:47:12.573215,,,,102,102,51,288.55,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:47:24.550392,,,,102,102,51,164.95,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:47:36.659968,,,,102,102,51,289.01,0,True,Algae,0.7921568751335144,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:47:48.651432,,,,102,102,51,144.71,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:48:00.721023,,,,102,102,51,288.84,0,True,Algae,0.9725490212440491,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:48:12.646841,,,,102,102,51,163.11,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:48:24.737460,,,,102,102,51,289.46,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:48:36.687836,,,,102,102,51,144.91,0,True,Algae,0.9647058844566345,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:48:48.893363,,,,102,102,51,289.47,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:49:00.794636,,,,102,102,51,156.91,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:49:12.756316,,,,102,102,51,288.92,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:49:24.767983,,,,102,102,51,155.01,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:49:36.918039,,,,102,102,51,288.94,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:49:48.643438,,,,102,102,51,151.4,0,True,Algae,0.9647058844566345,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:50:00.848315,,,,102,102,51,288.49,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:50:12.950975,,,,102,102,51,185.49,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:50:25.086711,,,,102,102,51,288.5,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:50:37.175781,,,,102,102,51,175.48,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:50:49.542090,,,,102,102,51,289.39,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:51:01.560636,,,,102,102,51,144.92,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:51:13.850940,,,,102,102,51,288.79,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:51:25.705780,,,,102,102,51,155.69,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:51:37.704439,,,,102,102,51,288.61,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:51:49.831546,,,,102,102,51,152.46,0,True,Algae,0.9803921580314636,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:52:01.970170,,,,102,102,51,288.99,0,True,Algae,0.9647058844566345,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:52:14.168681,,,,102,102,51,143.7,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:52:26.603622,,,,102,102,51,288.57,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:52:38.613171,,,,102,102,51,187.6,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:52:50.801854,,,,102,102,51,289.39,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:53:02.877500,,,,102,102,51,112.19,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:53:15.072099,,,,102,102,51,288.09,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:53:27.099617,,,,102,102,51,158.24,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:53:39.245020,,,,102,102,51,289.4,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:53:51.317181,,,,102,102,51,123.66,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:54:03.463019,,,,102,102,51,288.47,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:54:15.593456,,,,102,102,51,162.77,0,True,Algae,0.9843137264251709,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:54:27.710237,,,,102,102,51,288.17,0,True,Algae,0.9529411792755127,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:54:39.836644,,,,102,102,51,148.33,0,True,Algae,0.9647058844566345,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:54:52.062028,,,,102,102,51,289.3,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:55:04.126637,,,,102,102,51,154.36,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:55:16.292759,,,,102,102,51,289.37,0,True,Algae,0.9529411792755127,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:55:28.290560,,,,102,102,51,156.55,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:55:40.390534,,,,102,102,51,288.89,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:55:52.510605,,,,102,102,51,168.92,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:56:04.710626,,,,102,102,51,288.96,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:56:16.670642,,,,102,102,51,168.67,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:56:28.861010,,,,102,102,51,288.9,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:56:41.037470,,,,102,102,51,133.06,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:56:53.332805,,,,102,102,51,288.4,0,True,Algae,0.9529411792755127,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:57:05.408983,,,,102,102,51,163.64,0,True,Algae,0.9529411792755127,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:57:17.759365,,,,102,102,51,288.55,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:57:30.081402,,,,102,102,51,151.53,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:57:42.247364,,,,102,102,51,288.91,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:57:54.153658,,,,102,102,51,173.63,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:58:06.392980,,,,102,102,51,288.97,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:58:18.568546,,,,102,102,51,159.27,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:58:30.729784,,,,102,102,51,288.93,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:58:42.553876,,,,102,102,51,125.54,0,True,Algae,0.9529411792755127,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:58:54.691490,,,,102,102,51,288.97,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:59:06.418997,,,,102,102,51,168.66,0,True,Algae,0.9921568632125854,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:59:18.665927,,,,102,102,51,288.5,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:59:30.664823,,,,102,102,51,174.75,0,True,Algae,0.8666666746139526,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:59:42.805506,,,,102,102,51,289.99,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T22:59:54.757589,,,,102,102,51,176.25,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:00:06.874900,,,,102,102,51,289.95,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:00:18.848982,,,,102,102,51,158.62,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:00:30.927342,,,,102,102,51,290.21,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:00:43.012663,,,,102,102,51,154.4,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:00:55.289022,,,,102,102,51,290.48,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:01:07.583865,,,,102,102,51,144.31,0,True,Algae,0.9725490212440491,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:01:19.899082,,,,102,102,51,291.35,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:01:31.960227,,,,102,102,51,163.59,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:01:44.172429,,,,102,102,51,289.14,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:01:56.234698,,,,102,102,51,158.48,0,True,Algae,0.9803921580314636,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:02:08.551913,,,,102,102,51,289.19,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:02:20.507580,,,,102,102,51,193.6,0,True,Algae,0.9529411792755127,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:02:32.711561,,,,102,102,51,289.58,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:02:45.201514,,,,102,102,51,145.81,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:02:57.306490,,,,102,102,51,289.6,0,True,Algae,0.9529411792755127,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:03:09.239805,,,,102,102,51,63.88,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:03:21.613065,,,,102,102,51,289.54,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:03:33.669609,,,,102,102,51,158.37,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:03:45.865019,,,,102,102,51,289.47,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:03:57.833738,,,,102,102,51,123.37,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:04:10.147333,,,,102,102,51,289.75,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:04:21.989736,,,,102,102,51,31.54,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:04:34.210649,,,,102,102,51,288.59,0,True,Algae,0.9725490212440491,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:04:46.143139,,,,102,102,51,168.72,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:04:58.205063,,,,102,102,51,288.95,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:05:10.158737,,,,102,102,51,131.77,0,True,Algae,0.8941176533699036,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:05:22.578984,,,,102,102,51,289.21,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:05:34.628668,,,,102,102,51,116.22,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:05:46.805993,,,,102,102,51,288.79,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:05:58.813443,,,,102,102,51,37.8,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:06:10.989410,,,,102,102,51,289.27,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:06:23.171628,,,,102,102,51,176.23,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:06:35.513462,,,,102,102,51,295.61,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:06:47.497605,,,,102,102,51,108.63,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:06:59.753714,,,,102,102,51,289.19,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:12:28.420573,,,,102,102,51,149.62,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:12:40.555722,,,,102,102,51,289.61,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:12:52.504626,,,,102,102,51,176.62,0,True,Algae,0.9921568632125854,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:13:04.731105,,,,102,102,51,289.02,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:13:16.757711,,,,102,102,51,185.19,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:13:28.874120,,,,102,102,51,288.99,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:13:40.887683,,,,102,102,51,85.95,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:13:52.770282,,,,102,102,51,289.32,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:14:04.888682,,,,102,102,51,170.32,0,True,Algae,0.9529411792755127,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:14:16.987046,,,,102,102,51,289.96,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:14:29.086106,,,,102,102,51,124.76,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:14:40.978631,,,,102,102,51,289.52,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:14:52.903061,,,,102,102,51,159.57,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:15:05.210285,,,,102,102,51,289.53,0,True,Algae,0.9372549057006836,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:15:17.124978,,,,102,102,51,143.03,0,True,Algae,0.9529411792755127,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:15:29.204436,,,,102,102,51,289.4,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:15:41.163857,,,,102,102,51,179.58,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:15:53.238130,,,,102,102,51,288.61,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:16:05.183328,,,,102,102,51,138.16,0,True,Algae,0.9960784316062927,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:16:17.237240,,,,102,102,51,289.56,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:16:29.153661,,,,102,102,51,171.75,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:16:41.275488,,,,102,102,51,290.35,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:16:53.228705,,,,102,102,51,80.51,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:17:05.334730,,,,102,102,51,289.15,0,True,Algae,0.9921568632125854,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:17:17.249617,,,,102,102,51,163.94,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:17:29.125646,,,,102,102,51,290.0,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:17:41.000606,,,,102,102,51,142.84,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:17:53.135511,,,,102,102,51,289.19,0,True,Algae,0.9843137264251709,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:18:05.189643,,,,102,102,51,173.0,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:18:17.307957,,,,102,102,51,289.62,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:18:29.238089,,,,102,102,51,162.39,0,True,Algae,0.9803921580314636,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:18:41.145440,,,,102,102,51,289.09,0,True,Algae,0.9725490212440491,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:18:53.133702,,,,102,102,51,133.44,0,True,Algae,0.9843137264251709,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:19:05.240727,,,,102,102,51,289.48,0,True,Algae,0.9176470637321472,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:19:17.161646,,,,102,102,51,65.22,0,True,Algae,0.9725490212440491,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:19:29.247739,,,,102,102,51,289.19,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:19:41.163768,,,,102,102,51,191.41,0,True,Algae,0.9647058844566345,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:19:53.032321,,,,102,102,51,288.62,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:20:04.937421,,,,102,102,51,148.09,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:20:17.086251,,,,102,102,51,289.61,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:20:28.821404,,,,102,102,51,142.17,0,True,Algae,0.9803921580314636,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:20:40.888500,,,,102,102,51,289.86,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:20:52.818979,,,,102,102,51,178.8,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:21:04.927075,,,,102,102,51,288.97,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:21:16.895472,,,,102,102,51,184.08,0,True,Algae,0.9529411792755127,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:21:29.117726,,,,102,102,51,288.45,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:21:41.199585,,,,102,102,51,84.49,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:21:53.357888,,,,102,102,51,289.91,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:22:05.328573,,,,102,102,51,183.34,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:22:17.469492,,,,102,102,51,288.56,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:22:29.399598,,,,102,102,51,166.63,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:22:41.280274,,,,102,102,51,288.54,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:22:53.199530,,,,102,102,51,145.14,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:23:05.271878,,,,102,102,51,290.02,0,True,Algae,0.9803921580314636,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:23:17.260450,,,,102,102,51,161.49,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:23:29.356712,,,,102,102,51,289.88,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:23:41.294618,,,,102,102,51,167.89,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:23:53.384941,,,,102,102,51,288.45,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:24:05.300603,,,,102,102,51,154.41,0,True,Algae,0.9647058844566345,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:24:17.421194,,,,102,102,51,289.84,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:24:29.356594,,,,102,102,51,110.22,0,True,Algae,0.9529411792755127,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:24:41.423726,,,,102,102,51,289.47,0,True,Algae,0.9882352948188782,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:24:53.351533,,,,102,102,51,155.73,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:25:05.547703,,,,102,102,51,289.0,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:25:17.503640,,,,102,102,51,150.52,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:25:29.596182,,,,102,102,51,288.57,0,True,Algae,0.9960784316062927,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:25:41.516648,,,,102,102,51,159.29,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:25:53.691894,,,,102,102,51,288.54,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:26:05.643392,,,,102,102,51,135.97,0,True,Algae,1.0,stopped,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:26:17.800810,,,,102,102,51,288.53,0,True,Algae,1.0,forward_speed_100,running,No Algae,clear,Clear_No_Algae
+2026-03-09T23:26:29.738586,,,,102,102,51,133.86,0,True,Algae,0.9882352948188782,stopped,running,No Algae,clear,Clear_No_Algae
